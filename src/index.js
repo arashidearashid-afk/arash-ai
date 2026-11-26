@@ -1,4 +1,5 @@
 
+
 export default {
   async fetch(request, env) {
     const headers = {
@@ -32,7 +33,7 @@ export default {
       }
 
       const result = await env.AI.run(
-        "@cf/meta/llama-3.1-8b-instruct",
+        "@cf/meta/llama-3.1-8b-instruct-fast",
         {
           prompt: prompt.slice(0, 4000),
           max_tokens: 512
@@ -50,3 +51,4 @@ export default {
     }
   }
 };
+        
