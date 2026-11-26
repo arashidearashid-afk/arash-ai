@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#10152b">
+<title>آرش AI</title>
+<style>
+:root{color-scheme:dark;--bg:#0b1020;--panel:#151d35;--line:#293554;--text:#f4f6ff;--muted:#aab4d0;--accent:#8b7cff;--accent2:#35c9c1}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 80% 0%,#24265a 0,transparent 38%),var(--bg);color:var(--text);font-family:Tahoma,Arial,sans-serif;min-height:100vh}
+.wrap{max-width:900px;margin:auto;padding:22px 16px 40px}.top{display:flex;align-items:center;gap:13px;padding:12px 0 24px}
+.logo{width:48px;height:48px;border-radius:16px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;font-size:25px;box-shadow:0 8px 30px #6e69ff55}
+h1{font-size:22px;margin:0}.sub{font-size:12px;color:var(--muted);margin-top:5px}
+.pill{margin-right:auto;border:1px solid var(--line);padding:7px 10px;border-radius:20px;color:#c7d0e8;font-size:11px}
+.hero{text-align:center;padding:42px 12px 26px}.orb{width:78px;height:78px;margin:0 auto 18px;border-radius:26px;background:linear-gradient(140deg,#7668ff,#31c8be);display:grid;place-items:center;font-size:39px;box-shadow:0 12px 50px #786dff55}
+.hero h2{font-size:26px;margin:0 0 10px}.hero p{color:var(--muted);line-height:1.9;margin:0 auto;max-width:570px;font-size:14px}
+.panel{background:#121a30eF;border:1px solid var(--line);border-radius:22px;padding:16px;box-shadow:0 20px 70px #0005}
+.messages{min-height:170px;max-height:360px;overflow:auto;display:flex;flex-direction:column;gap:12px;padding:5px 2px 15px}
+.msg{max-width:85%;padding:12px 14px;border-radius:16px;line-height:1.9;font-size:14px;white-space:pre-wrap}
+.bot{align-self:flex-start;background:#202b49;border:1px solid #344365}.user{align-self:flex-end;background:linear-gradient(135deg,#655ce0,#4d6bd0)}
+.composer{display:flex;gap:9px;border-top:1px solid var(--line);padding-top:14px}
+input{flex:1;min-width:0;background:#0c1326;border:1px solid #344365;border-radius:14px;padding:14px;color:white;font:14px Tahoma;outline:none}
+input:focus{border-color:var(--accent)}button{border:0;border-radius:14px;padding:0 19px;background:linear-gradient(135deg,var(--accent),#5d76dc);color:white;font: bold 14px Tahoma;cursor:pointer}
+.note{color:#8995b5;font-size:11px;line-height:1.8;margin:12px 4px 0}.features{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:15px}
+.feature{background:#121a30;border:1px solid var(--line);border-radius:15px;padding:14px 10px;text-align:center;color:#dce3f8;font-size:12px}.feature b{display:block;font-size:21px;margin-bottom:8px}
+footer{text-align:center;color:#7885a7;font-size:11px;padding:24px 0}
+@media(max-width:560px){.hero{padding-top:26px}.hero h2{font-size:22px}.features{grid-template-columns:1fr}.pill{font-size:10px}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<header class="top">
+ <div class="logo">✦</div><div><h1>آرش AI</h1><div class="sub">دستیار هوشمند فارسی</div></div>
+ <div class="pill">نسخه آزمایشی</div>
+</header>
+<section class="hero">
+ <div class="orb">🤖</div>
+ <h2>سلام! به آرش AI خوش آمدی</h2>
+ <p>اینجا خانه دستیار هوشمند توست. فعلاً طرح اولیه سایت آماده شده؛ برای پاسخ‌گویی واقعی باید موتور هوش مصنوعی را به آن متصل کنیم.</p>
+</section>
+<section class="panel">
+ <div class="messages" id="messages" aria-live="polite">
+  <div class="msg bot">سلام! من آرش AI هستم. این نسخه فعلاً نمایشی است. بعد از اتصال به مدل هوش مصنوعی می‌توانم به سؤال‌هایت پاسخ واقعی بدهم.</div>
+ </div>
+ <form class="composer" id="form">
+  <input id="prompt" autocomplete="off" placeholder="پیامت را اینجا بنویس..." aria-label="پیام شما">
+  <button type="submit">ارسال</button>
+ </form>
+ <p class="note">توجه: پیام‌ها در این نمونه به هوش مصنوعی ارسال نمی‌شوند و فقط برای آزمایش ظاهر سایت هستند.</p>
+</section>
+<section class="features">
+ <div class="feature"><b>💬</b>گفت‌وگوی هوشمند</div>
+ <div class="feature"><b>🌍</b>ترجمه زبان‌ها</div>
+ <div class="feature"><b>🎨</b>ساخت تصویر</div>
+</section>
+<footer>آرش AI · ساخته‌شده برای شروع یک پروژه بزرگ</footer>
+</main>
+<script>
+const form=document.getElementById('form'),input=document.getElementById('prompt'),messages=document.getElementById('messages');
+form.addEventListener('submit',e=>{e.preventDefault();const value=input.value.trim();if(!value)return;
+const u=document.createElement('div');u.className='msg user';u.textContent=value;messages.appendChild(u);
+const b=document.createElement('div');b.className='msg bot';b.textContent='پیامت در این نمونه نمایشی ثبت شد. برای اینکه آرش AI جواب واقعی بدهد، باید در مرحله بعد موتور هوش مصنوعی را متصل کنیم.';messages.appendChild(b);
+input.value='';messages.scrollTop=messages.scrollHeight;});
+</script>
+</body></html>
