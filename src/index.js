@@ -1,5 +1,4 @@
 
-
 export default {
   async fetch(request, env) {
     const headers = {
@@ -29,14 +28,25 @@ export default {
       }
 
       if (!env.AI) {
-        throw new Error("اتصال Workers AI با نام AI پیدا نشد.");
+        throw new Error("اتصال هوش مصنوعی پیدا نشد.");
       }
+
+      const fullPrompt =
+        "تو آرش AI هستی، یک دستیار هوشمند و دوستانه. " +
+        "همیشه به زبان فارسی روان پاسخ بده، مگر اینکه کاربر زبان دیگری بخواهد. " +
+        "فقط به پیام فعلی کاربر پاسخ بده. " +
+        "متن کاربر را بی‌دلیل تکرار نکن و اطلاعات نامربوط نساز. " +
+        "پاسخ را واضح و مفید بنویس.\n\n" +
+        "پیام کاربر:\n" + prompt.slice(0, 4000) +
+        "\n\nپاسخ آرش AI:";
 
       const result = await env.AI.run(
         "@cf/meta/llama-3.1-8b-instruct-fast",
         {
-          prompt: prompt.slice(0, 4000),
-          max_tokens: 512
+          prompt: fullPrompt,
+          max_tokens: 512,
+          temperature: 0.3,
+          repetition_penalty: 1.2
         }
       );
 
@@ -51,4 +61,4 @@ export default {
     }
   }
 };
-        
+                          
