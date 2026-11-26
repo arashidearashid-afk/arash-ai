@@ -1,7 +1,8 @@
+
 export default {
   async fetch(request, env) {
     const headers = {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json; charset=utf-8",
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "POST, OPTIONS",
       "Access-Control-Allow-Headers": "Content-Type"
@@ -12,18 +13,22 @@ export default {
     }
 
     if (request.method !== "POST") {
-      return new Response(JSON.stringify({ error: "فقط POST مجاز است." }), {
-        status: 405, headers
-      });
+      return new Response(JSON.stringify({
+        error: "فقط POST مجاز است."
+      }), { status: 405, headers });
     }
 
     try {
       const { prompt } = await request.json();
 
-      if (!prompt || !prompt.trim()) {
-        return new Response(JSON.stringify({ error: "پیام خالی است." }), {
-          status: 400, headers
-        });
+      if (typeof prompt !== "string" || !prompt.trim()) {
+        return new Response(JSON.stringify({
+          error: "پیام خالی است."
+        }), { status: 400, headers });
+      }
+
+      if (!env.AI) {
+        throw new Error("اتصال Workers AI با نام AI پیدا نشد.");
       }
 
       const result = await env.AI.run(
@@ -34,13 +39,14 @@ export default {
         }
       );
 
-      return new Response(JSON.stringify({ reply: result.response }), {
-        headers
-      });
+      return new Response(JSON.stringify({
+        reply: result.response || "پاسخی دریافت نشد."
+      }), { headers });
+
     } catch (error) {
-      return new Response(JSON.stringify({ error: "خطا در ارتباط با هوش مصنوعی." }), {
-        status: 500, headers
-      });
+      return new Response(JSON.stringify({
+        error: error.message || "خطای ناشناخته در سرور"
+      }), { status: 500, headers });
     }
   }
 };
