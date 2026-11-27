@@ -342,6 +342,62 @@ if(SpeechRecognition){
 }else{
  micBtn.addEventListener("click",()=>alert("میکروفون گفتار در این مرورگر پشتیبانی نمی‌شود."));
 }
+const makeImageBtn = document.getElementById("makeImage");
+const imagePromptBox = document.getElementById("imagePrompt");
+const imageStyleBox = document.getElementById("imageStyle");
+const imageStatus = document.getElementById("imageStatus");
+const generatedImage = document.getElementById("generatedImage");
+
+makeImageBtn.addEventListener("click", async () => {
+  const prompt = imagePromptBox.value.trim();
+
+  if (!prompt) {
+    imageStatus.textContent = "اول توضیح تصویر را بنویس.";
+    return;
+  }
+
+  makeImageBtn.disabled = true;
+  imageStatus.textContent = "✨ آرش در حال خلق تصویر توست...";
+  generatedImage.style.display = "none";
+
+  try {
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        action: "image",
+        prompt: imageStyleBox.value + ", " + prompt
+      })
+    });
+
+    const raw = await response.text();
+    let data;
+
+    try {
+      data = JSON.parse(raw);
+    } catch {
+      throw new Error("پاسخ سرور قابل خواندن نیست.");
+    }
+
+    if (!response.ok || data.error) {
+      throw new Error(data.error || "ساخت تصویر ناموفق بود.");
+    }
+
+    if (!data.image) {
+      throw new Error("تصویری از سرور دریافت نشد.");
+    }
+
+    generatedImage.src = data.image;
+    generatedImage.style.display = "block";
+    imageStatus.textContent = "🎉 تصویر تو آماده شد!";
+
+  } catch (error) {
+    imageStatus.textContent = "خطا: " + error.message;
+  } finally {
+    makeImageBtn.disabled = false;
+  }
+});
+ 
 </script>
 </body>
 </html>
