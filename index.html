@@ -3,110 +3,185 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#10152b">
-<title>آرش AI | دستیار هوشمند</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#070b1b">
+<title>Arash AI | آرش هوشمند</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#0b1020;color:#f4f6ff;font-family:Tahoma,Arial,sans-serif;min-height:100vh}
-header{padding:17px 6%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #293554;background:#10172c}
-.logo{font-size:25px;font-weight:bold;color:#a78bfa}
-.logo span{color:#fff}
-select{background:#1b2540;color:white;border:1px solid #39496e;border-radius:10px;padding:10px}
-main{max-width:950px;margin:35px auto;padding:0 16px}
-.hero{text-align:center;margin:45px 0 30px}
-.hero h1{font-size:34px;margin:0 0 14px}
-.hero h1 span{color:#a78bfa}
-.hero p{color:#aab5d0;line-height:2}
-.panel{background:#141e35;border:1px solid #293958;border-radius:20px;padding:18px;box-shadow:0 15px 50px #0005}
-.chat{height:390px;overflow-y:auto;padding:8px;display:flex;flex-direction:column;gap:14px}
-.msg{padding:13px 16px;border-radius:15px;max-width:85%;line-height:2;white-space:pre-wrap;overflow-wrap:anywhere}
-.user{background:#5944a6;align-self:flex-start}
-.bot{background:#202d49;align-self:flex-end}
-.welcome{color:#bdc9e5;text-align:center;margin:auto;line-height:2}
-.input-area{display:flex;gap:9px;margin-top:15px;align-items:center}
-textarea{flex:1;resize:none;min-width:0;height:55px;background:#0d1529;color:white;border:1px solid #39496e;border-radius:13px;padding:15px;font:inherit;outline:none}
-button{border:0;border-radius:12px;padding:13px 17px;background:#7657df;color:white;font-weight:bold;cursor:pointer}
-button:disabled{opacity:.5;cursor:wait}
-.secondary{background:#263653}
-.tools{display:flex;gap:10px;flex-wrap:wrap;margin-top:13px}
-.tools button{font-size:13px}
-.note{color:#8e9bb8;font-size:12px;line-height:2;text-align:center;margin-top:17px}
-.features{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px}
-.feature{background:#141e35;border:1px solid #293958;border-radius:15px;padding:17px;text-align:center}
-.feature strong{display:block;margin-bottom:8px;color:#c4b5fd}
-.feature small{color:#9ba9c8;line-height:1.8}
-footer{text-align:center;color:#7785a5;padding:35px 10px;font-size:12px}
-@media(max-width:600px){.hero h1{font-size:26px}.features{grid-template-columns:1fr}.input-area{flex-wrap:wrap}.input-area textarea{flex-basis:100%}.chat{height:360px}}
+:root{--bg:#070b1b;--panel:#101832;--line:#29385f;--purple:#a36cff;--blue:#27caff;--text:#f6f5ff;--muted:#a4b1d0}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Tahoma,Arial,sans-serif;min-height:100vh}
+body:before,body:after{content:"";position:fixed;z-index:-1;border-radius:50%;filter:blur(100px);pointer-events:none}
+body:before{width:360px;height:360px;background:#7b35ff38;top:-140px;right:-100px}
+body:after{width:330px;height:330px;background:#008cff24;bottom:-150px;left:-100px}
+button,select,textarea{font:inherit}
+header{height:76px;padding:0 5%;display:flex;align-items:center;justify-content:space-between;background:#080d20eF;border-bottom:1px solid #ffffff16;position:sticky;top:0;z-index:5;backdrop-filter:blur(18px)}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(140deg,#9a4dff,#1bcbff);box-shadow:0 0 24px #8054ff55;font-size:31px;font-weight:bold;color:white}
+.brand-name{font-size:22px;font-weight:bold;letter-spacing:-1px}
+.brand-name span{color:#4bd7ff}
+.brand small{display:block;color:#a9b7d7;font-size:9px;letter-spacing:3px;margin-top:4px}
+.head{display:flex;align-items:center;gap:14px}
+.online{font-size:11px;color:#76edb1}
+.online:before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:#53e7a0;margin-left:7px}
+select{background:#151e39;color:white;border:1px solid var(--line);padding:10px;border-radius:10px;max-width:120px}
+main{max-width:1180px;margin:auto;padding:25px 18px 45px}
+.hero{text-align:center;padding:30px 10px 35px}
+.tag{display:inline-block;color:#d5c4ff;background:#9b68ff18;border:1px solid #a36cff66;border-radius:30px;padding:9px 16px;font-size:11px}
+.hero h1{font-size:clamp(27px,5vw,48px);line-height:1.5;margin:17px 0 8px}
+.gradient{background:linear-gradient(90deg,#4bdcff,#ad82ff,#e3a7ff);color:transparent;background-clip:text;-webkit-background-clip:text}
+.hero p{color:var(--muted);font-size:13px;line-height:2}
+.layout{display:grid;grid-template-columns:235px minmax(0,1fr) 225px;gap:15px;align-items:start}
+.panel{background:#101832eF;border:1px solid var(--line);border-radius:19px;box-shadow:0 12px 45px #0004}
+.sidebar{padding:15px}
+.section-title{font-size:12px;color:#c9d2e9;margin:5px 5px 14px}
+.tool{width:100%;display:flex;align-items:center;gap:10px;text-align:right;background:#ffffff07;color:white;border:1px solid #ffffff0d;border-radius:12px;padding:11px 9px;margin-bottom:8px}
+.tool:hover{border-color:#a36cff88;background:#a36cff16}
+.tool-icon{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:#8659ff25;font-size:18px}
+.tool strong{font-size:11px;display:block}
+.tool small{font-size:9px;color:var(--muted);display:block;margin-top:5px}
+.chat-panel{padding:16px;min-width:0}
+.chat-head{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffffff15;padding:0 0 14px}
+.assistant{display:flex;align-items:center;gap:10px}
+.bot-logo{width:40px;height:40px;border-radius:13px;background:linear-gradient(135deg,#9d54ff,#22c8ff);display:grid;place-items:center;font-size:25px;font-weight:bold}
+.assistant strong{font-size:12px}
+.assistant small{display:block;color:#75eab0;font-size:10px;margin-top:5px}
+.clear{background:#ffffff09;color:#b7c5e2;border:1px solid var(--line);border-radius:9px;padding:8px;font-size:10px}
+.chat{height:360px;overflow:auto;display:flex;flex-direction:column;gap:13px;padding:17px 3px}
+.welcome{text-align:center;margin:auto;max-width:400px;color:#cbd4eb;line-height:2}
+.welcome .symbol{font-size:42px;color:#b18aff;text-shadow:0 0 25px #a36cff}
+.welcome strong{display:block;font-size:17px;margin:10px}
+.welcome p{font-size:11px;color:var(--muted)}
+.msg{max-width:88%;padding:12px 15px;border-radius:14px;font-size:12px;line-height:2;white-space:pre-wrap;overflow-wrap:anywhere}
+.user{align-self:flex-start;background:linear-gradient(130deg,#6846c7,#3e3c91);border-bottom-left-radius:4px}
+.bot{align-self:flex-end;background:#202d4b;border:1px solid #35446b;border-bottom-right-radius:4px}
+.composer{background:#0a1125;border:1px solid #34436a;border-radius:15px;padding:9px}
+textarea{width:100%;height:57px;resize:none;background:transparent;border:0;outline:0;color:white;padding:9px;font-size:12px;line-height:2}
+textarea::placeholder{color:#8794b5}
+.composer-bottom{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.tools{display:flex;gap:6px}
+.small-btn{background:#1a2747;color:#c7d3ed;border:1px solid #34436a;border-radius:9px;padding:9px;font-size:11px}
+.send{background:linear-gradient(110deg,#914bff,#278df5);color:white;border:0;border-radius:10px;padding:10px 18px;font-size:12px;font-weight:bold}
+.send:disabled{opacity:.5}
+.hint{text-align:center;color:#8492b3;font-size:9px;margin:11px 0 0}
+.profile{padding:17px;text-align:center}
+.profile-title{font-size:13px;margin:3px 0 15px}
+.portrait{width:108px;height:108px;border-radius:50%;margin:auto;display:grid;place-items:center;background:linear-gradient(140deg,#a44fff,#25caff);padding:4px;box-shadow:0 0 28px #8b5cff55}
+.portrait-inner{width:100%;height:100%;border-radius:50%;background:linear-gradient(140deg,#243c67,#111b36);display:grid;place-items:center;font-size:49px;border:3px solid #0b1227}
+.profile h3{font-size:16px;margin:13px 0 5px}
+.profile .role{color:#aebbd9;font-size:10px}
+.crown{font-size:25px;margin:12px}
+.profile-line{font-size:10px;color:#d0d9ef;line-height:2;margin-top:11px}
+.profile-line span{color:#70e7aa;margin-left:5px}
+.signature{color:#d9b7ff;font-size:13px;margin-top:17px}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:17px}
+.card{padding:15px;text-align:center}
+.card b{font-size:22px}
+.card strong{display:block;font-size:11px;margin:8px 0}
+.card small{font-size:9px;color:var(--muted);line-height:1.8}
+footer{text-align:center;color:#8390ae;padding:24px 10px;font-size:10px}
+@media(max-width:900px){.layout{grid-template-columns:190px minmax(0,1fr)}.profile{grid-column:1/-1;display:flex;align-items:center;justify-content:center;gap:18px;text-align:right}.profile-title,.crown,.profile-line,.signature{display:none}.portrait{width:65px;height:65px;margin:0}.portrait-inner{font-size:29px}.profile h3{margin:0 0 5px}.cards{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){header{padding:0 12px;height:66px}.brand-name{font-size:18px}.logo{width:41px;height:41px}.online{display:none}main{padding:15px 10px 35px}.hero{padding:24px 4px}.layout{grid-template-columns:1fr}.sidebar{display:grid;grid-template-columns:1fr 1fr;gap:7px}.section-title{grid-column:1/-1}.tool{margin:0;padding:8px 5px}.chat-panel{padding:12px}.chat{height:340px}.profile{grid-column:auto}.cards{gap:8px}.card{padding:12px}.msg{max-width:94%}}
 </style>
 </head>
 <body>
 <header>
-  <div class="logo">آرش <span>AI ✨</span></div>
-  <select id="language" aria-label="زبان">
-    <option value="fa">فارسی</option>
-    <option value="en">English</option>
-    <option value="de">Deutsch</option>
-    <option value="es">Español</option>
-    <option value="fr">Français</option>
-    <option value="ru">Русский</option>
-    <option value="tr">Türkçe</option>
-    <option value="ar">العربية</option>
-    <option value="it">Italiano</option>
-    <option value="ja">日本語</option>
-    <option value="ko">한국어</option>
-    <option value="zh">中文</option>
-  </select>
+  <div class="brand">
+    <div class="logo">A</div>
+    <div class="brand-name">Arash <span>AI</span><small>SMARTER WORLD</small></div>
+  </div>
+  <div class="head">
+    <span class="online">آنلاین</span>
+    <select id="language" aria-label="زبان">
+      <option value="fa">فارسی</option>
+      <option value="en">English</option>
+      <option value="de">Deutsch</option>
+      <option value="es">Español</option>
+      <option value="fr">Français</option>
+      <option value="ru">Русский</option>
+      <option value="tr">Türkçe</option>
+      <option value="ar">العربية</option>
+      <option value="it">Italiano</option>
+      <option value="ja">日本語</option>
+      <option value="ko">한국어</option>
+      <option value="zh">中文</option>
+    </select>
+  </div>
 </header>
 
 <main>
   <section class="hero">
-    <h1>به دنیای <span>آرش AI</span> خوش آمدی</h1>
-    <p>دستیار هوشمند تو برای گفتگو، یادگیری، ایده‌پردازی و خلاقیت</p>
+    <div class="tag">✦ نسل جدید دستیار هوشمند ✦</div>
+    <h1>به دنیای <span class="gradient">آرش AI</span> خوش آمدی</h1>
+    <p>همراه هوشمند تو برای گفتگو، یادگیری، خلاقیت و ساختن آینده‌ای بهتر</p>
   </section>
 
-  <section class="panel">
-    <div class="chat" id="chat">
-      <div class="welcome" id="welcome">
-        <div style="font-size:42px">✨</div>
-        <strong>سلام! من آرش هستم.</strong>
-        <div>هر سؤالی داری بپرس؛ از همین‌جا شروع کنیم.</div>
+  <section class="layout">
+    <aside class="panel sidebar">
+      <div class="section-title">✦ ابزارهای آرش AI</div>
+      <button class="tool" onclick="focusChat()"><span class="tool-icon">💬</span><span><strong>گفتگوی هوشمند</strong><small>صحبت با آرش</small></span></button>
+      <button class="tool" onclick="comingSoon('تولید تصویر')"><span class="tool-icon">🎨</span><span><strong>تولید تصویر</strong><small>خلق تصاویر با هوش مصنوعی</small></span></button>
+      <button class="tool" onclick="comingSoon('ساخت ویدیو')"><span class="tool-icon">🎬</span><span><strong>ساخت ویدیو</strong><small>به‌زودی</small></span></button>
+      <button class="tool" onclick="comingSoon('تولید موسیقی')"><span class="tool-icon">🎵</span><span><strong>تولید موسیقی</strong><small>به‌زودی</small></span></button>
+      <button class="tool" onclick="comingSoon('ترجمه پیشرفته')"><span class="tool-icon">🌍</span><span><strong>ترجمه پیشرفته</strong><small>۱۲ زبان</small></span></button>
+      <button class="tool" onclick="comingSoon('برنامه‌نویسی')"><span class="tool-icon">💻</span><span><strong>برنامه‌نویسی</strong><small>کمک در نوشتن کد</small></span></button>
+      <div style="font-size:10px;color:#aebbd8;line-height:2;margin-top:12px">🚀 ابزارهای بیشتر در نسخه‌های آینده اضافه می‌شوند.</div>
+    </aside>
+
+    <section class="panel chat-panel">
+      <div class="chat-head">
+        <div class="assistant">
+          <div class="bot-logo">A</div>
+          <div><strong>آرش AI</strong><small>● دستیار هوشمند شما</small></div>
+        </div>
+        <button class="clear" id="clear">پاک کردن گفتگو 🗑</button>
       </div>
-    </div>
 
-    <div class="input-area">
-      <textarea id="message" placeholder="پیامت را برای آرش بنویس..." rows="1"></textarea>
-      <button id="send">ارسال ↗</button>
-    </div>
+      <div class="chat" id="chat">
+        <div class="welcome" id="welcome">
+          <div class="symbol">✧ A ✧</div>
+          <strong>سلام! من آرش هستم 👋</strong>
+          <p>به دنیای آرش AI خوش آمدی.<br>هر سؤالی داری بپرس؛ من اینجا هستم تا کمکت کنم.</p>
+        </div>
+      </div>
 
-    <div class="tools">
-      <button class="secondary" id="mic">🎤 صحبت با آرش</button>
-      <button class="secondary" id="stopVoice">🔇 توقف صدا</button>
-      <button class="secondary" id="clear">🗑 پاک کردن گفتگو</button>
-    </div>
-    <div class="note" id="status">آرش AI آماده گفتگو است.</div>
+      <div class="composer">
+        <textarea id="message" placeholder="پیام خود را اینجا بنویسید..."></textarea>
+        <div class="composer-bottom">
+          <div class="tools">
+            <button class="small-btn" id="mic" title="صحبت با میکروفون">🎤</button>
+            <button class="small-btn" id="stopVoice" title="توقف صدا">🔇</button>
+          </div>
+          <button class="send" id="send">ارسال ↗</button>
+        </div>
+      </div>
+      <div class="hint" id="status">آرش AI آماده گفتگو است · برای ارسال Enter را بزنید</div>
+    </section>
+
+    <aside class="panel profile">
+      <div class="profile-title">سازنده و توسعه‌دهنده</div>
+      <div class="portrait"><div class="portrait-inner">👨🏻‍💻</div></div>
+      <div>
+        <div class="crown">👑</div>
+        <h3>Hossein</h3>
+        <div class="role">سازنده آرش AI</div>
+        <div class="profile-line"><span>✓</span> علاقه‌مند به فناوری و هوش مصنوعی</div>
+        <div class="profile-line"><span>✓</span> ساخت آینده‌ای هوشمندتر</div>
+        <div class="signature">با عشق ❤️</div>
+      </div>
+    </aside>
   </section>
 
-  <section class="features">
-    <div class="feature">
-      <strong>💬 گفتگوی هوشمند</strong>
-      <small>پاسخ به پرسش‌ها و کمک در موضوعات مختلف</small>
-    </div>
-    <div class="feature">
-      <strong>🌍 ۱۲ زبان</strong>
-      <small>انتخاب زبان مورد علاقه برای گفتگو</small>
-    </div>
-    <div class="feature">
-      <strong>🎨 ساخت تصویر</strong>
-      <small>این قابلیت در نسخه‌های بعدی اضافه می‌شود</small>
-    </div>
+  <section class="cards">
+    <div class="panel card"><b>🌍</b><strong>چندزبانه</strong><small>پشتیبانی از ۱۲ زبان</small></div>
+    <div class="panel card"><b>⚡</b><strong>سریع و هوشمند</strong><small>گفتگوی متنی هوشمند</small></div>
+    <div class="panel card"><b>🔒</b><strong>حریم خصوصی</strong><small>از اطلاعات خود مراقبت کن</small></div>
+    <div class="panel card"><b>💜</b><strong>همراه همیشگی</strong><small>آرش AI کنار توست</small></div>
   </section>
 </main>
 
-<footer>Arash AI © 2026 | ساخته‌شده با علاقه ❤️</footer>
+<footer>Arash AI © 2026 · آرش AI، همراه هوشمند زندگی تو ❤️</footer>
 
 <script>
-
 const API_URL = "https://arash-ai-api.arashidearashid.workers.dev/";
 const chat = document.getElementById("chat");
 const input = document.getElementById("message");
@@ -115,129 +190,99 @@ const statusText = document.getElementById("status");
 const language = document.getElementById("language");
 
 const languageNames = {
-  fa:"فارسی", en:"English", de:"German", es:"Spanish",
-  fr:"French", ru:"Russian", tr:"Turkish", ar:"Arabic",
-  it:"Italian", ja:"Japanese", ko:"Korean", zh:"Chinese"
+fa:"Persian",en:"English",de:"German",es:"Spanish",
+fr:"French",ru:"Russian",tr:"Turkish",ar:"Arabic",
+it:"Italian",ja:"Japanese",ko:"Korean",zh:"Chinese"
 };
 
-function addMessage(text, type) {
-  const welcome = document.getElementById("welcome");
-  if (welcome) welcome.remove();
+function focusChat(){input.focus();window.scrollTo({top:document.body.scrollHeight,behavior:"smooth"});}
+function comingSoon(name){statusText.textContent=name+" در نسخه آینده اضافه می‌شود.";}
 
-  const item = document.createElement("div");
-  item.className = "msg " + type;
-  item.textContent = text;
-  chat.appendChild(item);
-  chat.scrollTop = chat.scrollHeight;
-  return item;
+function addMessage(text,type){
+  const welcome=document.getElementById("welcome");
+  if(welcome)welcome.remove();
+  const el=document.createElement("div");
+  el.className="msg "+type;
+  el.textContent=text;
+  chat.appendChild(el);
+  chat.scrollTop=chat.scrollHeight;
+  return el;
 }
 
-async function sendMessage() {
-  const message = input.value.trim();
-  if (!message || send.disabled) return;
+async function sendMessage(){
+  const message=input.value.trim();
+  if(!message||send.disabled)return;
+  addMessage(message,"user");
+  input.value="";
+  send.disabled=true;
+  statusText.textContent="آرش در حال فکر کردن است...";
+  const answer=addMessage("در حال دریافت پاسخ...","bot");
 
-  addMessage(message, "user");
-  input.value = "";
-  send.disabled = true;
-  statusText.textContent = "آرش در حال فکر کردن است...";
-
-  const answerBox = addMessage("در حال دریافت پاسخ...", "bot");
-
-  try {
-    const lang = languageNames[language.value] || "Persian";
-    const response = await fetch(API_URL, {
-      method: "POST",
-      headers: {"Content-Type":"application/json"},
-      body: JSON.stringify({
-        prompt: "Please answer in " + lang +
-          ". Be friendly, natural and helpful.\n\nUser message: " + message
+  try{
+    const lang=languageNames[language.value]||"Persian";
+    const response=await fetch(API_URL,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        prompt:"Please answer in "+lang+". Be friendly, natural and helpful.\n\nUser message: "+message
       })
     });
-
-    const raw = await response.text();
+    const raw=await response.text();
     let data;
-
-    try {
-      data = JSON.parse(raw);
-    } catch {
-      throw new Error("پاسخ سرور قابل خواندن نیست. لطفاً دوباره تلاش کن.");
-    }
-
-    if (!response.ok) {
-      throw new Error(data.error || "خطای سرور: " + response.status);
-    }
-
-    if (data.error) throw new Error(data.error);
-
-    answerBox.textContent = data.reply || "پاسخی دریافت نشد.";
-    statusText.textContent = "پاسخ آماده شد 🌟";
-
-  } catch (error) {
-    answerBox.textContent = "مشکل در ارتباط با آرش AI:\n" + error.message;
-    statusText.textContent = "ارتباط برقرار نشد.";
-  } finally {
-    send.disabled = false;
+    try{data=JSON.parse(raw);}
+    catch(e){throw new Error("پاسخ سرور JSON معتبر نیست. کد پاسخ: "+response.status+" | "+raw.slice(0,160));}
+    if(!response.ok)throw new Error(data.error||"خطای سرور "+response.status);
+    if(data.error)throw new Error(data.error);
+    answer.textContent=data.reply||"پاسخی دریافت نشد.";
+    statusText.textContent="پاسخ آرش آماده است ✨";
+  }catch(error){
+    answer.textContent="مشکل در ارتباط با آرش AI:\n"+error.message;
+    statusText.textContent="ارتباط با سرور ناموفق بود.";
+  }finally{
+    send.disabled=false;
     input.focus();
-    chat.scrollTop = chat.scrollHeight;
+    chat.scrollTop=chat.scrollHeight;
   }
 }
 
-send.addEventListener("click", sendMessage);
+send.addEventListener("click",sendMessage);
+input.addEventListener("keydown",e=>{
+  if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendMessage();}
+});
 
-input.addEventListener("keydown", function(event) {
-  if (event.key === "Enter" && !event.shiftKey) {
-    event.preventDefault();
-    sendMessage();
+document.getElementById("clear").addEventListener("click",()=>{
+  chat.innerHTML='<div class="welcome" id="welcome"><div class="symbol">✧ A ✧</div><strong>گفتگوی تازه شروع شد!</strong><p>چه کمکی از دستم برمی‌آید؟</p></div>';
+  statusText.textContent="گفتگوی تازه آماده است.";
+});
+
+document.getElementById("stopVoice").addEventListener("click",()=>{
+  if("speechSynthesis" in window)speechSynthesis.cancel();
+});
+
+chat.addEventListener("click",e=>{
+  if(e.target.classList.contains("bot")&&"speechSynthesis" in window){
+    speechSynthesis.cancel();
+    const speech=new SpeechSynthesisUtterance(e.target.textContent);
+    speech.lang=language.value==="fa"?"fa-IR":language.value;
+    speechSynthesis.speak(speech);
   }
 });
 
-document.getElementById("clear").addEventListener("click", function() {
-  chat.innerHTML = "";
-  const welcome = document.createElement("div");
-  welcome.className = "welcome";
-  welcome.id = "welcome";
-  welcome.textContent = "گفتگوی تازه شروع شد. چه کمکی از دستم برمی‌آید؟";
-  chat.appendChild(welcome);
-  statusText.textContent = "گفتگوی جدید آماده است.";
-});
-
-document.getElementById("stopVoice").addEventListener("click", function() {
-  if ("speechSynthesis" in window) speechSynthesis.cancel();
-});
-
-if ("speechSynthesis" in window) {
-  chat.addEventListener("click", function(event) {
-    const item = event.target;
-    if (item.classList.contains("bot") && item.textContent) {
-      speechSynthesis.cancel();
-      const speech = new SpeechSynthesisUtterance(item.textContent);
-      speech.lang = language.value === "fa" ? "fa-IR" : language.value;
-      speechSynthesis.speak(speech);
-    }
-  });
-}
-
-document.getElementById("mic").addEventListener("click", function() {
-  const SpeechRecognition =
-    window.SpeechRecognition || window.webkitSpeechRecognition;
-
-  if (!SpeechRecognition) {
-    statusText.textContent = "مرورگر شما از تشخیص صدا پشتیبانی نمی‌کند.";
-    return;
-  }
-
-  const recognition = new SpeechRecognition();
-  recognition.lang = language.value === "fa" ? "fa-IR" : language.value;
-  recognition.interimResults = false;
-  recognition.onstart = () => statusText.textContent = "گوش می‌دهم... صحبت کن 🎤";
-  recognition.onresult = event => {
-    input.value = event.results[0][0].transcript;
-    statusText.textContent = "صدایت دریافت شد. ارسال را بزن.";
+document.getElementById("mic").addEventListener("click",()=>{
+  const Recognition=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!Recognition){statusText.textContent="مرورگر از میکروفون گفتاری پشتیبانی نمی‌کند.";return;}
+  const recognition=new Recognition();
+  recognition.lang=language.value==="fa"?"fa-IR":language.value;
+  recognition.interimResults=false;
+  recognition.onstart=()=>statusText.textContent="گوش می‌دهم... صحبت کن 🎤";
+  recognition.onresult=e=>{
+    input.value=e.results[0][0].transcript;
+    statusText.textContent="صدایت دریافت شد؛ ارسال را بزن.";
   };
-  recognition.onerror = () => statusText.textContent = "دریافت صدا ناموفق بود.";
+  recognition.onerror=()=>statusText.textContent="دریافت صدا ناموفق بود.";
   recognition.start();
 });
 </script>
 </body>
-       </html>
-       
+                                </html>
+                                                                                   
