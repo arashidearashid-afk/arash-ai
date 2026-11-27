@@ -4,4 +4,7 @@ compatibility_date = "2026-11-26"
 
 [ai]
 binding = "AI"
-                                
+
+[assets]
+directory = "./"
+binding = "ASSETS"
