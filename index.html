@@ -1,113 +1,239 @@
 
-<
-!doctype html>
+<!doctype html>
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#10152b">
-<title>آرش AI</title>
+<meta name="theme-color" content="#090b1d">
+<title>ARASH AI | هوش مصنوعی</title>
 <style>
-:root{color-scheme:dark;--bg:#0b1020;--line:#293554;--text:#f4f6ff;--muted:#aab4d0;--accent:#8b7cff;--accent2:#35c9c1}
+:root{--bg:#090b1d;--panel:#141831;--line:#292e50;--purple:#9568ff;--cyan:#35d8e8;--text:#f7f6ff;--muted:#a7abc7}
 *{box-sizing:border-box}
-body{margin:0;background:radial-gradient(circle at 80% 0%,#24265a 0,transparent 38%),var(--bg);color:var(--text);font-family:Tahoma,Arial,sans-serif;min-height:100vh}
-.wrap{max-width:900px;margin:auto;padding:22px 16px 40px}
-.top{display:flex;align-items:center;gap:13px;padding:12px 0 24px}
-.logo{width:48px;height:48px;border-radius:16px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;font-size:25px}
-h1{font-size:22px;margin:0}
-.sub{font-size:12px;color:var(--muted);margin-top:5px}
-.hero{text-align:center;padding:35px 12px 26px}
-.orb{width:78px;height:78px;margin:0 auto 18px;border-radius:26px;background:linear-gradient(140deg,#7668ff,#31c8be);display:grid;place-items:center;font-size:39px}
-.hero h2{font-size:26px;margin:0 0 10px}
-.hero p{color:var(--muted);line-height:1.9;font-size:14px}
-.panel{background:#121a30;border:1px solid var(--line);border-radius:22px;padding:16px}
-.messages{min-height:170px;max-height:55vh;overflow:auto;display:flex;flex-direction:column;gap:12px;padding:5px 2px 15px}
-.msg{max-width:85%;padding:12px 14px;border-radius:16px;line-height:1.9;font-size:14px;white-space:pre-wrap}
-.bot{align-self:flex-start;background:#202b49;border:1px solid #344365}
-.user{align-self:flex-end;background:linear-gradient(135deg,#655ce0,#4d6bd0)}
-.composer{display:flex;gap:9px;border-top:1px solid var(--line);padding-top:14px}
-input{flex:1;min-width:0;background:#0c1326;border:1px solid #344365;border-radius:14px;padding:14px;color:white;font:14px Tahoma;outline:none}
-button{border:0;border-radius:14px;padding:0 19px;background:linear-gradient(135deg,var(--accent),#5d76dc);color:white;font:bold 14px Tahoma;cursor:pointer}
-button:disabled{opacity:.5}
-.note{color:#8995b5;font-size:11px;line-height:1.8;margin:12px 4px 0}
-footer{text-align:center;color:#7885a7;font-size:11px;padding:24px 0}
+body{margin:0;background:radial-gradient(ellipse at 80% 0%,#34216c 0,transparent 38%),radial-gradient(ellipse at 0% 70%,#102d55 0,transparent 35%),var(--bg);color:var(--text);font-family:Tahoma,Arial,sans-serif;min-height:100vh}
+button,input,select{font:inherit}
+button{cursor:pointer;color:white;border:0}
+.wrap{max-width:1120px;margin:auto;padding:18px}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0 24px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:52px;height:52px;border-radius:18px;background:linear-gradient(135deg,#a16aff,#25d9e8);display:grid;place-items:center;font-size:29px;box-shadow:0 0 28px #885cff77}
+.brand h1{margin:0;font-size:22px;letter-spacing:1px}
+.brand small{color:var(--muted);font-size:11px}
+select{background:#171b38;color:white;border:1px solid #45466d;border-radius:12px;padding:11px}
+.hero{text-align:center;padding:40px 12px 30px}
+.robot{width:100px;height:100px;border-radius:32px;margin:0 auto 22px;background:linear-gradient(135deg,#9a62ff,#28d9e5);display:grid;place-items:center;font-size:54px;box-shadow:0 0 55px #845dff66;animation:float 4s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-9px)}}
+.hero h2{font-size:clamp(27px,5vw,43px);margin:10px 0;background:linear-gradient(90deg,#fff,#b9a1ff,#6deafa);background-clip:text;color:transparent}
+.hero p{color:var(--muted);line-height:2;font-size:14px}
+.tag{display:inline-block;padding:8px 15px;border:1px solid #62519b;border-radius:30px;color:#d7c9ff;font-size:12px;margin-bottom:12px}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin:20px 0 26px}
+.feature{background:linear-gradient(145deg,#1b2042,#11162c);border:1px solid var(--line);border-radius:19px;padding:18px 10px;text-align:center}
+.feature b{display:block;margin:9px 0;font-size:14px}
+.feature span{font-size:27px}
+.feature small{color:var(--muted);font-size:11px}
+.panel{background:#11162de8;border:1px solid #34365d;border-radius:25px;padding:18px;box-shadow:0 18px 60px #0005}
+.panel h3{margin:0 0 15px;font-size:17px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px}
+.tab{padding:10px 15px;border-radius:12px;background:#202544;color:#c9c9e8;font-size:12px}
+.tab.active{background:linear-gradient(120deg,#8157ed,#397ee9);color:white}
+.messages{height:300px;overflow:auto;display:flex;flex-direction:column;gap:12px;padding:8px}
+.msg{max-width:88%;padding:13px 15px;border-radius:17px;line-height:2;font-size:13px;white-space:pre-wrap}
+.bot{align-self:flex-start;background:#22294b;border:1px solid #363e68}
+.user{align-self:flex-end;background:linear-gradient(120deg,#7653d9,#376bd0)}
+.composer{display:flex;gap:9px;border-top:1px solid var(--line);padding-top:15px}
+input{min-width:0;flex:1;background:#090e20;border:1px solid #343b60;border-radius:14px;padding:15px;color:white;outline:none}
+input:focus{border-color:var(--cyan)}
+.action{background:linear-gradient(120deg,#9058ef,#397cdb);border-radius:13px;padding:12px 17px;font-size:13px}
+.tools{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}
+.tools button{background:#242a4a;border:1px solid #41476d;padding:10px 13px;border-radius:12px;font-size:12px}
+.tools button:hover,.tab:hover{background:#41416f}
+.imagebox{display:none;margin-top:14px;background:#0c1125;border:1px dashed #555d8d;border-radius:18px;padding:18px;text-align:center;color:var(--muted);line-height:2}
+.imagebox input{width:100%;margin:12px 0}
+.note{font-size:11px;color:var(--muted);line-height:2;margin-top:13px}
+footer{text-align:center;padding:30px 10px;color:#858bad;font-size:11px;line-height:2}
+@media(max-width:600px){.features{grid-template-columns:1fr 1fr}.feature:last-child{grid-column:span 2}.hero{padding-top:25px}.composer{flex-wrap:wrap}.composer input{flex-basis:70%}.messages{height:260px}}
 </style>
 </head>
 <body>
-<main class="wrap">
-<header class="top">
-<div class="logo">✦</div>
-<div>
-<h1>آرش AI</h1>
-<div class="sub">دستیار هوشمند فارسی</div>
-</div>
+<div class="wrap">
+<header>
+ <div class="brand">
+  <div class="logo">✦</div>
+  <div><h1>ARASH AI</h1><small>YOUR INTELLIGENT WORLD</small></div>
+ </div>
+ <select id="language" aria-label="Language">
+  <option value="fa">🇮🇷 فارسی</option>
+  <option value="en">🇬🇧 English</option>
+  <option value="de">🇩🇪 Deutsch</option>
+  <option value="es">🇪🇸 Español</option>
+  <option value="fr">🇫🇷 Français</option>
+  <option value="ru">🇷🇺 Русский</option>
+  <option value="tr">🇹🇷 Türkçe</option>
+  <option value="ar">🇸🇦 العربية</option>
+  <option value="it">🇮🇹 Italiano</option>
+  <option value="ja">🇯🇵 日本語</option>
+  <option value="ko">🇰🇷 한국어</option>
+  <option value="zh">🇨🇳 中文</option>
+ </select>
 </header>
 
 <section class="hero">
-<div class="orb">🤖</div>
-<h2>سلام! به آرش AI خوش آمدی</h2>
-<p>من آرش AI هستم؛ سؤال خودت را بنویس تا پاسخ بدهم.</p>
+ <div class="tag">✧ THE FUTURE OF AI IS HERE ✧</div>
+ <div class="robot">🤖</div>
+ <h2 id="headline">دنیای هوش مصنوعی، در دستان تو</h2>
+ <p id="intro">با آرش AI گفتگو کن، ایده بساز، خلاقیتت را آزاد کن و دنیای تازه‌ای کشف کن.</p>
+</section>
+
+<section class="features">
+ <div class="feature"><span>💬</span><b>چت هوشمند</b><small>گفتگو و پاسخ‌گویی</small></div>
+ <div class="feature"><span>🎨</span><b>ساخت تصویر</b><small>تبدیل ایده به تصویر</small></div>
+ <div class="feature"><span>🎙️</span><b>هوش مصنوعی صوتی</b><small>گفتگو با صدا</small></div>
 </section>
 
 <section class="panel">
-<div class="messages" id="messages" aria-live="polite">
-<div class="msg bot">سلام! من آرش AI هستم. چطور می‌توانم کمکت کنم؟</div>
+ <h3>✨ دستیار هوشمند آرش</h3>
+ <div class="tabs">
+  <button class="tab active" id="chatTab">💬 گفتگو</button>
+  <button class="tab" id="imageTab">🎨 تصویر</button>
+  <button class="tab" id="voiceTab">🎙️ صدا</button>
+ </div>
+
+ <div id="chatArea">
+  <div class="messages" id="messages" aria-live="polite">
+   <div class="msg bot">سلام! من آرش AI هستم. خوش آمدی! چطور می‌توانم کمکت کنم؟ ✨</div>
+  </div>
+  <form class="composer" id="form">
+   <input id="prompt" autocomplete="off" placeholder="پیامت را اینجا بنویس..." required>
+   <button class="action" id="send" type="submit">ارسال ↗</button>
+  </form>
+  <div class="tools">
+   <button type="button" id="mic">🎙️ صحبت کن</button>
+   <button type="button" id="speak">🔊 خواندن آخرین پاسخ</button>
+   <button type="button" id="stop">⏹ توقف صدا</button>
+  </div>
+ </div>
+
+ <div class="imagebox" id="imageArea">
+  <h3>🎨 استودیوی ساخت تصویر آرش AI</h3>
+  <p>ایده تصویری خودت را توصیف کن.</p>
+  <input id="imagePrompt" placeholder="مثلاً یک شهر آینده‌نگر در شب...">
+  <button class="action" type="button" id="imageButton">ساخت تصویر</button>
+  <p class="note" id="imageNote">برای تولید واقعی تصویر باید سرویس تولید تصویر به سرور متصل شود. این بخش فعلاً آماده اتصال است.</p>
+ </div>
+
+ <div class="imagebox" id="voiceArea">
+  <h3>🎙️ استودیوی صوتی آرش AI</h3>
+  <p>برای صحبت با میکروفون، دکمه «صحبت کن» را بزن. پاسخ‌ها را هم می‌توانی با صدا بشنوی.</p>
+  <button class="action" type="button" id="voiceMic">🎤 شروع صحبت</button>
+  <p class="note">قابلیت تشخیص گفتار به پشتیبانی مرورگر و مجوز میکروفون نیاز دارد.</p>
+ </div>
+ <p class="note">آرش AI در حال توسعه است. امکانات پیشرفته به سرویس‌های مربوطه متصل خواهند شد.</p>
+</section>
+
+<footer>✦ ARASH AI ✦<br>ساخته شده برای آینده‌ای هوشمندتر</footer>
 </div>
 
-<form class="composer" id="form">
-<input id="prompt" autocomplete="off" placeholder="پیامت را اینجا بنویس..." aria-label="پیام شما">
-<button type="submit">ارسال</button>
-</form>
-<p class="note">برای پاسخ‌گویی به اینترنت متصل باش.</p>
-</section>
-<footer>آرش AI · دستیار هوشمند تو</footer>
-</main>
-
 <script>
-const form=document.getElementById('form');
-const input=document.getElementById('prompt');
-const messages=document.getElementById('messages');
 const API_URL='https://arash-ai-api.arashidearashid.workers.dev/';
+const $=id=>document.getElementById(id);
+const messages=$('messages');
+let lastReply='';
 function addMessage(text,cls){
-const el=document.createElement('div');
-el.className='msg '+cls;
-el.textContent=text;
-messages.appendChild(el);
-messages.scrollTop=messages.scrollHeight;
-return el;
+ const el=document.createElement('div');
+ el.className='msg '+cls;
+ el.textContent=text;
+ messages.appendChild(el);
+ messages.scrollTop=messages.scrollHeight;
+ return el;
 }
-
-form.addEventListener('submit',async e=>{
-e.preventDefault();
-const value=input.value.trim();
-if(!value)return;
-
-addMessage(value,'user');
-input.value='';
-
-const waiting=addMessage('آرش AI در حال فکر کردن است...','bot');
-const button=form.querySelector('button');
-button.disabled=true;
-
-try{
-const response=await fetch(API_URL,{
-method:'POST',
-headers:{'Content-Type':'application/json'},
-body:JSON.stringify({prompt:value})
+$('form').addEventListener('submit',async e=>{
+ e.preventDefault();
+ const value=$('prompt').value.trim();
+ if(!value)return;
+ addMessage(value,'user');
+ $('prompt').value='';
+ const waiting=addMessage('آرش AI در حال فکر کردن است...','bot');
+ $('send').disabled=true;
+ try{
+  const response=await fetch(API_URL,{
+   method:'POST',
+   headers:{'Content-Type':'application/json'},
+   body:JSON.stringify({prompt:value})
+  });
+  const data=await response.json();
+  if(!response.ok)throw new Error(data.error||'خطا در ارتباط با سرور');
+  lastReply=data.reply||'پاسخی دریافت نشد.';
+  waiting.textContent=lastReply;
+ }catch(error){
+  waiting.textContent='خطا در اتصال: '+error.message;
+ }finally{
+  $('send').disabled=false;
+  $('prompt').focus();
+ }
 });
-const data=await response.json();
-
-if(!response.ok)throw new Error(data.error||'خطا در ارتباط با سرور');
-
-waiting.textContent=data.reply||'پاسخی دریافت نشد.';
-}catch(error){
-waiting.textContent='خطا در اتصال: '+error.message;
-}finally{
-button.disabled=false;
-input.focus();
-messages.scrollTop=messages.scrollHeight;
+function tab(name){
+ ['chatArea','imageArea','voiceArea'].forEach(id=>$(id).style.display='none');
+ ['chatTab','imageTab','voiceTab'].forEach(id=>$(id).classList.remove('active'));
+ $(name+'Area').style.display='block';
+ $(name+'Tab').classList.add('active');
 }
-});
+$('chatTab').onclick=()=>tab('chat');
+$('imageTab').onclick=()=>tab('image');
+$('voiceTab').onclick=()=>tab('voice');
+
+function speak(text){
+ if(!text){alert('هنوز پاسخی برای خواندن وجود ندارد.');return;}
+ if(!('speechSynthesis' in window)){alert('مرورگر شما از پخش گفتار پشتیبانی نمی‌کند.');return;}
+ speechSynthesis.cancel();
+ const u=new SpeechSynthesisUtterance(text);
+ u.lang=$('language').value;
+ u.rate=1;
+ speechSynthesis.speak(u);
+}
+$('speak').onclick=()=>speak(lastReply);
+$('stop').onclick=()=>speechSynthesis.cancel();
+
+function listen(){
+ const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+ if(!SR){alert('تشخیص گفتار در این مرورگر پشتیبانی نمی‌شود.');return;}
+ const r=new SR();
+ r.lang=$('language').value;
+ r.onresult=e=>{$('prompt').value=e.results[0][0].transcript;$('prompt').focus();};
+ r.onerror=()=>alert('دسترسی میکروفون را بررسی کن.');
+ r.start();
+}
+$('mic').onclick=listen;
+$('voiceMic').onclick=listen;
+
+$('imageButton').onclick=()=>{
+ $('imageNote').textContent='برای ساخت تصویر واقعی، ابتدا باید API تولید تصویر به سرور آرش AI متصل شود. هنوز تصویری تولید نشده است.';
+};
+
+const translations={
+ en:['AI for everyone, in your hands','Chat with Arash AI, create ideas and explore a new world.'],
+ de:['Die Welt der KI in deinen Händen','Sprich mit Arash AI, entwickle Ideen und entdecke Neues.'],
+ es:['El mundo de la IA en tus manos','Habla con Arash AI, crea ideas y descubre un mundo nuevo.'],
+ fr:['Le monde de l’IA entre vos mains','Discutez avec Arash AI, créez et explorez.'],
+ ru:['Мир искусственного интеллекта в твоих руках','Общайся с Arash AI, создавай идеи и открывай новое.'],
+ tr:['Yapay zeka dünyası ellerinde','Arash AI ile konuş, fikirler üret ve keşfet.'],
+ ar:['عالم الذكاء الاصطناعي بين يديك','تحدث مع آرش AI وابتكر أفكارًا جديدة.'],
+ it:['Il mondo dell’IA nelle tue mani','Parla con Arash AI, crea idee e scopri un nuovo mondo.'],
+ ja:['AIの世界をあなたの手に','Arash AIと会話し、新しいアイデアを生み出そう。'],
+ ko:['손안에 펼쳐지는 AI의 세계','Arash AI와 대화하고 새로운 아이디어를 만들어 보세요.'],
+ zh:['人工智能世界，尽在掌握','与 Arash AI 对话，创造灵感，探索新世界。']
+};
+$('language').onchange=e=>{
+ const lang=e.target.value;
+ const rtl=['fa','ar'].includes(lang);
+ document.documentElement.lang=lang;
+ document.documentElement.dir=rtl?'rtl':'ltr';
+ if(translations[lang]){
+  $('headline').textContent=translations[lang][0];
+  $('intro').textContent=translations[lang][1];
+ }else{
+  $('headline').textContent='دنیای هوش مصنوعی، در دستان تو';
+  $('intro').textContent='با آرش AI گفتگو کن، ایده بساز و خلاقیتت را آزاد کن.';
+ }
+};
 </script>
 </body>
 </html>
