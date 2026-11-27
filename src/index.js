@@ -11,12 +11,14 @@ export default {
     if (request.method === "OPTIONS") {
       return new Response(null, { headers });
     }
+
     if (
       (request.method === "GET" || request.method === "HEAD") &&
       env.ASSETS
     ) {
       return env.ASSETS.fetch(request);
     }
+
     if (request.method !== "POST") {
       return new Response(JSON.stringify({
         error: "فقط POST مجاز است."
@@ -24,11 +26,12 @@ export default {
     }
 
     try {
-      const { prompt } = await request.json();
+      const body = await request.json();
+      const { prompt, action } = body;
 
       if (typeof prompt !== "string" || !prompt.trim()) {
         return new Response(JSON.stringify({
-          error: "پیام خالی است."
+          error: "لطفاً توضیح خود را بنویس."
         }), { status: 400, headers });
       }
 
@@ -36,13 +39,33 @@ export default {
         throw new Error("اتصال هوش مصنوعی پیدا نشد.");
       }
 
+      // تولید تصویر واقعی و کارتونی
+      if (action === "image") {
+        const result = await env.AI.run(
+          "@cf/black-forest-labs/flux-1-schnell",
+          {
+            prompt: prompt.slice(0, 1800),
+            steps: 4
+          }
+        );
+
+        if (!result || !result.image) {
+          throw new Error("تصویر تولید نشد. دوباره تلاش کن.");
+        }
+
+        return new Response(JSON.stringify({
+          image: "data:image/jpeg;base64," + result.image
+        }), { headers });
+      }
+
+      // گفتگوی متنی قبلی
       const result = await env.AI.run(
         "@cf/meta/llama-3.1-8b-instruct-fast",
         {
           messages: [
             {
               role: "system",
-              content: "تو آرش AI هستی؛ یک دستیار هوشمند و دوستانه. همیشه به فارسی روان پاسخ بده، مگر اینکه کاربر زبان دیگری بخواهد. فقط به سؤال واقعی کاربر پاسخ بده. هشتگ، تبلیغات، نام کاربری و متن بی‌ربط تولید نکن. پیام کاربر را تکرار نکن. پاسخ‌هایت طبیعی، دقیق و متناسب با سؤال باشند. اگر کاربر فقط سلام کرد، کوتاه و دوستانه سلام کن."
+              content: "تو آرش AI هستی؛ یک دستیار هوشمند و دوستانه. همیشه به فارسی روان پاسخ بده، مگر اینکه کاربر زبان دیگری بخواهد. فقط به سؤال واقعی کاربر پاسخ بده. هشتگ، تبلیغات و متن بی‌ربط تولید نکن. پیام کاربر را تکرار نکن. پاسخ‌ها طبیعی و دقیق باشند."
             },
             {
               role: "user",
@@ -66,3 +89,4 @@ export default {
     }
   }
 };
+                          
