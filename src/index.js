@@ -31,7 +31,7 @@ export default {
 
       if (typeof prompt !== "string" || !prompt.trim()) {
         return new Response(JSON.stringify({
-          error: "لطفاً توضیح خود را بنویس."
+          error: "لطفاً توضیحات را بنویس."
         }), { status: 400, headers });
       }
 
@@ -39,13 +39,38 @@ export default {
         throw new Error("اتصال هوش مصنوعی پیدا نشد.");
       }
 
-      // تولید تصویر واقعی و کارتونی
+      // موتور ساخت تصویر با بهبود دستور کاربر
       if (action === "image") {
+
+        // تبدیل توضیحات به دستور تصویری دقیق انگلیسی
+        const improved = await env.AI.run(
+          "@cf/meta/llama-3.1-8b-instruct-fast",
+          {
+            messages: [
+              {
+                role: "system",
+                content:
+                  "You are an expert image prompt translator. Convert the user's image request into one precise, detailed English image-generation prompt. Preserve the user's exact subject, gender, age appearance, number of people, clothing, hairstyle, colors, actions, setting and art style. Never change a male character into a female character or a female character into a male character. Never replace the requested subject with another subject. Do not invent extra people. If the user requests a boy, clearly describe a male boy with masculine facial features. If the user requests a girl, clearly describe a female girl. Keep all requested details. Output only the final English prompt, without explanations."
+              },
+              {
+                role: "user",
+                content: prompt.slice(0, 1800)
+              }
+            ],
+            max_tokens: 300,
+            temperature: 0.1
+          }
+        );
+
+        const finalPrompt =
+          (improved.response || prompt).trim().slice(0, 2000);
+
+        // تولید تصویر
         const result = await env.AI.run(
           "@cf/black-forest-labs/flux-1-schnell",
           {
-            prompt: prompt.slice(0, 1800),
-            steps: 4
+            prompt: finalPrompt,
+            steps: 8
           }
         );
 
@@ -54,11 +79,12 @@ export default {
         }
 
         return new Response(JSON.stringify({
-          image: "data:image/jpeg;base64," + result.image
+          image: "data:image/jpeg;base64," + result.image,
+          promptUsed: finalPrompt
         }), { headers });
       }
 
-      // گفتگوی متنی قبلی
+      // گفتگوی متنی
       const result = await env.AI.run(
         "@cf/meta/llama-3.1-8b-instruct-fast",
         {
@@ -89,4 +115,3 @@ export default {
     }
   }
 };
-                          
