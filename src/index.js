@@ -11,7 +11,12 @@ export default {
     if (request.method === "OPTIONS") {
       return new Response(null, { headers });
     }
-
+    if (
+      (request.method === "GET" || request.method === "HEAD") &&
+      env.ASSETS
+    ) {
+      return env.ASSETS.fetch(request);
+    }
     if (request.method !== "POST") {
       return new Response(JSON.stringify({
         error: "فقط POST مجاز است."
