@@ -8,396 +8,326 @@
 <title>Arash AI | آرش هوش مصنوعی</title>
 <style>
 :root{
- --accent:#a855f7;
- --accent2:#22d3ee;
- --bg:#080b18;
- --panel:rgba(20,25,48,.78);
- --line:rgba(168,85,247,.25);
- --text:#f5f3ff;
- --muted:#a5a9c5;
+  --bg:#080b18;--panel:#11182b;--line:#263653;
+  --text:#f3f6ff;--muted:#9ba9c5;
+  --a:#42e8c5;--b:#7b72ff;--c:#28b9ff;
 }
 *{box-sizing:border-box}
 body{
- margin:0;min-height:100vh;color:var(--text);
- font-family:Tahoma,Arial,sans-serif;
- background:
- radial-gradient(ellipse at 15% 10%,color-mix(in srgb,var(--accent) 18%,transparent),transparent 38%),
- radial-gradient(ellipse at 90% 80%,color-mix(in srgb,var(--accent2) 13%,transparent),transparent 40%),
- var(--bg);
- transition:background .5s,color .3s;
- overflow-x:hidden;
+  margin:0;background:
+  radial-gradient(ellipse at 15% 10%,#172957 0,transparent 38%),
+  radial-gradient(ellipse at 90% 85%,#211747 0,transparent 38%),
+  var(--bg);
+  color:var(--text);font-family:Tahoma,Arial,sans-serif;
+  min-height:100vh;
 }
-body:before{
- content:"";position:fixed;inset:0;pointer-events:none;opacity:.12;
- background-image:radial-gradient(#fff 1px,transparent 1px);
- background-size:34px 34px;
-}
-.glow{
- position:fixed;width:280px;height:280px;border-radius:50%;
- filter:blur(100px);opacity:.17;pointer-events:none;
- background:var(--accent);top:20%;left:-100px;
- animation:float 9s ease-in-out infinite alternate;
-}
-.glow.two{background:var(--accent2);top:auto;left:auto;right:-100px;bottom:5%;animation-delay:-4s}
-@keyframes float{to{transform:translate(80px,60px) scale(1.3)}}
-@keyframes breathe{0%,100%{transform:scale(.96);filter:brightness(1)}50%{transform:scale(1.06);filter:brightness(1.4)}}
-@keyframes rotate{to{transform:rotate(360deg)}}
-@keyframes pulse{0%,100%{box-shadow:0 0 15px var(--accent)}50%{box-shadow:0 0 35px var(--accent),0 0 65px var(--accent2)}}
-header{
- position:sticky;top:0;z-index:5;
- display:flex;align-items:center;justify-content:space-between;
- padding:13px 5%;background:rgba(8,11,24,.76);
- backdrop-filter:blur(18px);border-bottom:1px solid var(--line);
-}
-.brand{display:flex;align-items:center;gap:12px;font-size:21px;font-weight:bold}
-.logo{
- width:43px;height:43px;border-radius:14px;display:grid;place-items:center;
- font-size:25px;font-weight:bold;
- background:linear-gradient(135deg,var(--accent),var(--accent2));
- color:white;box-shadow:0 0 22px var(--accent);
- animation:pulse 4s infinite;
-}
-.brand small{display:block;font-size:10px;color:var(--muted);font-weight:normal;margin-top:4px}
-.header-right{display:flex;align-items:center;gap:10px}
-.status{font-size:11px;color:#72f5bd}
-.status:before{content:"●";margin-left:5px}
-button,select,input{font:inherit}
+button,input,textarea{font:inherit}
 button{cursor:pointer}
-select,.small-btn{
- color:var(--text);background:var(--panel);border:1px solid var(--line);
- border-radius:12px;padding:10px 12px;
+.app{max-width:1250px;margin:auto;padding:18px;min-height:100vh}
+header{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;padding:12px 4px 20px;border-bottom:1px solid #263653;
 }
-main{max-width:1050px;margin:auto;padding:25px 16px 45px}
-.hero{text-align:center;padding:22px 0 18px}
-.orb-wrap{width:145px;height:145px;margin:0 auto 16px;position:relative;display:grid;place-items:center}
-.orb{
- width:100px;height:100px;border-radius:50%;
- background:radial-gradient(circle at 35% 30%,#fff 0%,var(--accent2) 13%,var(--accent) 42%,#17112f 75%);
- box-shadow:0 0 25px var(--accent),0 0 65px color-mix(in srgb,var(--accent) 60%,transparent),inset 0 0 22px #fff8;
- animation:breathe 3.5s ease-in-out infinite;
+.logo{display:flex;align-items:center;gap:12px}
+.logo-mark{
+  width:46px;height:46px;border-radius:15px;
+  display:grid;place-items:center;font-size:25px;font-weight:bold;
+  background:linear-gradient(135deg,#23e7c0,#536bff);
+  color:#071321;box-shadow:0 0 25px #36d9cf66;
 }
-.orb:after{
- content:"";position:absolute;inset:4px;border-radius:50%;
- border:1px solid color-mix(in srgb,var(--accent2) 65%,transparent);
- transform:rotateX(65deg);animation:rotate 12s linear infinite;
+.logo h1{font-size:21px;margin:0}
+.logo small{display:block;color:var(--muted);margin-top:5px}
+.status{color:var(--a);font-size:12px}
+.layout{display:grid;grid-template-columns:225px 1fr;gap:18px;margin-top:18px}
+.sidebar,.main{
+  background:#10172bd9;border:1px solid var(--line);
+  border-radius:22px;padding:16px;
 }
-.ring{position:absolute;inset:0;border:1px solid var(--line);border-radius:50%;animation:rotate 18s linear infinite}
-.ring:before{content:"";position:absolute;width:9px;height:9px;border-radius:50%;background:var(--accent2);top:12px;left:20px;box-shadow:0 0 15px var(--accent2)}
-.hero h1{font-size:clamp(27px,5vw,42px);margin:8px 0;background:linear-gradient(90deg,#fff,var(--accent2),var(--accent));background-clip:text;color:transparent}
-.hero p{color:var(--muted);font-size:14px;line-height:2;margin:8px}
-.hero .tag{display:inline-block;border:1px solid var(--line);border-radius:30px;padding:7px 14px;font-size:11px;color:var(--accent2);margin-top:8px}
-.settings{
- display:flex;justify-content:center;align-items:center;gap:9px;flex-wrap:wrap;margin:16px auto 23px
+.side-title{color:var(--muted);font-size:12px;margin:4px 8px 12px}
+.tool{
+  width:100%;padding:13px 12px;margin-bottom:8px;
+  color:var(--text);background:#17223a;border:1px solid #263653;
+  border-radius:12px;text-align:right;transition:.2s;
 }
-.settings span{font-size:12px;color:var(--muted)}
-.colors{display:flex;gap:8px;align-items:center}
-.swatch{width:23px;height:23px;border-radius:50%;border:2px solid #ffffff70;padding:0;transition:.2s}
-.swatch:focus,.swatch:hover{transform:scale(1.25)}
-#customColor{width:35px;height:32px;border:0;background:none;padding:0;cursor:pointer}
-.chatbox{
- border:1px solid var(--line);border-radius:23px;
- background:var(--panel);backdrop-filter:blur(22px);
- box-shadow:0 15px 60px #0006,0 0 30px color-mix(in srgb,var(--accent) 9%,transparent);
- overflow:hidden;
+.tool:hover,.tool.active{
+  border-color:var(--a);background:#15313a;
+  box-shadow:0 0 16px #32e4c533;
 }
-.chat-head{padding:16px 19px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
-.chat-head strong{font-size:14px}
-.chat-head small{display:block;color:var(--muted);font-size:10px;margin-top:5px}
-.clear{background:transparent;color:var(--muted);border:0;font-size:12px}
-.messages{height:390px;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:15px;scroll-behavior:smooth}
-.message{max-width:88%;padding:13px 16px;border-radius:17px;font-size:14px;line-height:2;white-space:pre-wrap;overflow-wrap:anywhere}
-.bot{align-self:flex-start;background:rgba(120,90,190,.13);border:1px solid var(--line);border-top-right-radius:5px}
-.user{align-self:flex-end;background:linear-gradient(120deg,color-mix(in srgb,var(--accent) 65%,#29204a),color-mix(in srgb,var(--accent2) 30%,#24213c));border:1px solid #ffffff25;border-top-left-radius:5px}
-.msg-tools{display:flex;gap:12px;margin-top:7px}
-.msg-tools button{background:none;border:0;color:var(--muted);font-size:11px;padding:2px}
-.typing{color:var(--accent2);font-size:12px;padding:0 20px 12px;display:none}
-.composer{padding:14px;border-top:1px solid var(--line);display:flex;gap:9px;align-items:flex-end}
-#prompt{
- flex:1;min-width:0;resize:none;max-height:130px;min-height:48px;
- background:rgba(4,8,22,.65);border:1px solid var(--line);border-radius:15px;
- padding:14px;color:var(--text);outline:none;line-height:1.7;
+.tool span{margin-left:9px}
+.avatar-area{
+  display:flex;align-items:center;gap:14px;
+  padding:12px;margin-bottom:14px;
+  background:linear-gradient(110deg,#172c43,#211b45);
+  border:1px solid #34466a;border-radius:17px;
 }
-#prompt:focus{border-color:var(--accent);box-shadow:0 0 15px color-mix(in srgb,var(--accent) 25%,transparent)}
-.action{
- width:47px;height:47px;border-radius:14px;border:1px solid var(--line);
- background:rgba(255,255,255,.05);color:var(--text);font-size:18px;
+.avatar{
+  width:62px;height:62px;border-radius:50%;
+  display:grid;place-items:center;font-size:32px;
+  background:radial-gradient(circle,#6df5d8,#3845a7 65%,#171b38);
+  box-shadow:0 0 25px #4ee8d877;
 }
-.send{
- background:linear-gradient(135deg,var(--accent),var(--accent2));
- color:white;border:0;box-shadow:0 0 18px color-mix(in srgb,var(--accent) 40%,transparent);
+.avatar-area h2{font-size:16px;margin:0 0 6px}
+.avatar-area p{font-size:12px;color:var(--muted);margin:0}
+.chat{
+  height:390px;overflow:auto;padding:8px 4px;
+  display:flex;flex-direction:column;gap:12px;
 }
-.action:disabled{opacity:.4;cursor:not-allowed}
-.footer{text-align:center;color:var(--muted);font-size:11px;line-height:2;margin-top:25px}
-.footer b{color:var(--accent2)}
-@media(max-width:600px){
- header{padding:11px 13px}.brand{font-size:17px}.logo{width:38px;height:38px}
- .status{display:none}main{padding:15px 11px 30px}
- .hero{padding-top:15px}.orb-wrap{width:120px;height:120px}
- .orb{width:83px;height:83px}.messages{height:48vh;min-height:300px;padding:13px}
- .message{max-width:94%;font-size:13px}.composer{padding:10px;gap:6px}
- .action{width:42px;height:45px}
+.message{
+  max-width:88%;padding:13px 15px;border-radius:16px;
+  line-height:1.9;font-size:14px;white-space:pre-wrap;
+  overflow-wrap:anywhere;
+}
+.bot{align-self:flex-start;background:#1b2943;border:1px solid #304363}
+.user{align-self:flex-end;background:#16443f;border:1px solid #277c70}
+.message img{max-width:100%;border-radius:12px;margin-top:8px}
+.composer{
+  border:1px solid #34466a;border-radius:17px;
+  background:#0b1222;padding:10px;margin-top:12px;
+}
+textarea{
+  width:100%;min-height:65px;max-height:150px;resize:vertical;
+  color:var(--text);background:transparent;border:0;outline:0;
+  padding:8px;line-height:1.8;
+}
+.actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.primary{
+  border:0;border-radius:12px;padding:11px 18px;
+  color:#06151a;font-weight:bold;
+  background:linear-gradient(110deg,var(--a),var(--c));
+}
+.secondary{
+  border:1px solid #34466a;background:#17223a;
+  color:var(--text);padding:10px 12px;border-radius:11px;
+}
+.secondary:disabled,.primary:disabled{opacity:.5;cursor:not-allowed}
+.hint{font-size:11px;color:var(--muted);margin:12px 4px 0;line-height:1.8}
+.preview{max-width:100%;border-radius:14px;margin-top:12px}
+.hidden{display:none!important}
+footer{text-align:center;color:#7484a5;font-size:11px;padding:18px}
+@media(max-width:760px){
+ .app{padding:10px}.layout{grid-template-columns:1fr}
+ .sidebar{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}
+ .side-title{grid-column:1/-1}
+ .tool{margin:0;padding:11px 8px;font-size:12px}
+ .chat{height:350px}
 }
 </style>
 </head>
 <body>
-<div class="glow"></div><div class="glow two"></div>
-
+<div class="app">
 <header>
- <div class="brand">
-  <div class="logo">A</div>
-  <div>ARASH AI<small>هوش مصنوعی نسل آینده</small></div>
- </div>
- <div class="header-right">
-  <span class="status">آماده پاسخگویی</span>
-  <select id="language" aria-label="زبان">
-   <option value="fa">فارسی</option>
-   <option value="en">English</option>
-   <option value="ar">العربية</option>
-   <option value="de">Deutsch</option>
-   <option value="fr">Français</option>
-   <option value="es">Español</option>
-   <option value="it">Italiano</option>
-   <option value="ru">Русский</option>
-   <option value="tr">Türkçe</option>
-   <option value="hi">हिन्दी</option>
-   <option value="zh">中文</option>
-   <option value="ja">日本語</option>
-  </select>
- </div>
+  <div class="logo">
+    <div class="logo-mark">A</div>
+    <div><h1>Arash AI</h1><small>دستیار هوشمند آرش</small></div>
+  </div>
+  <div class="status">● آماده به کار</div>
 </header>
 
-<main>
- <section class="hero">
-  <div class="orb-wrap"><div class="ring"></div><div class="orb"></div></div>
-  <h1>دنیایی از هوش، در دستان تو</h1>
-  <p>با آرش AI گفتگو کن، ایده بساز و آینده را تجربه کن.</p>
-  <span class="tag">✦ هوشمند • خلاق • همیشه همراه تو ✦</span>
- </section>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="side-title">ابزارهای آرش AI</div>
+    <button class="tool active" data-mode="chat"><span>💬</span>گفت‌وگو با هوش مصنوعی</button>
+    <button class="tool" data-mode="image"><span>🎨</span>ساخت تصویر</button>
+    <button class="tool" data-mode="translate"><span>🌍</span>ترجمه زبان‌ها</button>
+    <button class="tool" data-mode="code"><span>💻</span>برنامه‌نویسی</button>
+    <button class="tool" data-mode="video"><span>🎬</span>ساخت ویدئو</button>
+    <button class="tool" data-mode="music"><span>🎵</span>ساخت موسیقی</button>
+    <button class="tool" data-mode="voice"><span>🎙️</span>گفت‌وگوی صوتی</button>
+    <button class="tool" id="clearChat"><span>🗑️</span>گفت‌وگوی جدید</button>
+  </aside>
 
- <div class="settings">
-  <span>رنگ دلخواه خودت را انتخاب کن:</span>
-  <div class="colors">
-   <button class="swatch" style="background:#a855f7" data-color="#a855f7" aria-label="بنفش"></button>
-   <button class="swatch" style="background:#2583ff" data-color="#2583ff" aria-label="آبی"></button>
-   <button class="swatch" style="background:#ec4899" data-color="#ec4899" aria-label="صورتی"></button>
-   <button class="swatch" style="background:#ef4444" data-color="#ef4444" aria-label="قرمز"></button>
-   <button class="swatch" style="background:#22c55e" data-color="#22c55e" aria-label="سبز"></button>
-   <button class="swatch" style="background:#eab308" data-color="#eab308" aria-label="طلایی"></button>
-   <button class="swatch" style="background:#06b6d4" data-color="#06b6d4" aria-label="فیروزه‌ای"></button>
-  </div>
-  <input id="customColor" type="color" value="#a855f7" title="انتخاب رنگ دلخواه">
- </div>
+  <main class="main">
+    <div class="avatar-area">
+      <div class="avatar">🤖</div>
+      <div><h2>سلام! من آرش هستم</h2>
+      <p>دستیار هوشمند و دوستانه تو. چه کاری برایت انجام بدهم؟</p></div>
+    </div>
 
- <section class="chatbox">
-  <div class="chat-head">
-   <div><strong>✦ گفتگوی هوشمند آرش</strong><small>دستیار هوشمند تو</small></div>
-   <button class="clear" id="clearBtn">پاک کردن گفتگو ↺</button>
-  </div>
-  <div class="messages" id="messages">
-   <div class="message bot">سلام! ✨ من آرش AI هستم. خوشحالم اینجایی! هر سؤالی داری بپرس تا با هم شروع کنیم. 💜</div>
-  </div>
-  <div class="typing" id="typing">آرش در حال فکر کردن است...</div>
-  <div class="composer">
-   <button class="action" id="micBtn" title="صحبت با میکروفون">🎙</button>
-   <textarea id="prompt" rows="1" placeholder="پیامت را برای آرش بنویس..."></textarea>
-   <button class="action send" id="sendBtn" title="ارسال">➤</button>
-  </div>
- </section>
+    <div class="chat" id="chat">
+      <div class="message bot">سلام! به آرش AI خوش آمدی ✨
+می‌توانی با من گفت‌وگو کنی، تصویر بسازی، متن ترجمه کنی یا در برنامه‌نویسی کمک بگیری.</div>
+    </div>
 
-<section class="chatbox" style="margin-top:22px;padding:20px">
-  <h3 style="color:var(--accent2)">🎨 استودیوی تصویر آرش AI</h3>
-  <p style="color:var(--muted);font-size:13px">ایده‌ات را بنویس و تصویر بساز.</p>
-
-  <select id="imageStyle" style="width:100%;margin:10px 0">
-    <option value="photorealistic">عکس واقعی</option>
-    <option value="cartoon illustration">نقاشی کارتونی</option>
-    <option value="anime illustration">انیمه</option>
-    <option value="digital fantasy art">نقاشی فانتزی</option>
-  </select>
-
-  <textarea id="imagePrompt" rows="3" placeholder="مثلاً یک قلعه زیبا کنار دریا هنگام غروب..." style="width:100%;padding:13px;border-radius:12px;background:#10152b;color:white;border:1px solid var(--line)"></textarea>
-
-  <button id="makeImage" class="action send" style="width:100%;margin-top:12px">✨ ساخت تصویر</button>
-
-  <p id="imageStatus" style="font-size:12px;color:var(--accent2)"></p>
-  <img id="generatedImage" alt="تصویر ساخته‌شده توسط آرش AI" style="display:none;width:100%;border-radius:16px;margin-top:12px">
-</section>
- 
- <div class="footer">
-  <b>ARASH AI</b> · ساخته‌شده با علاقه و خلاقیت ❤️<br>
-  آینده همین‌جاست.
- </div>
-</main>
+    <div class="composer">
+      <textarea id="prompt" placeholder="درخواستت را اینجا بنویس..."></textarea>
+      <div class="actions">
+        <button class="primary" id="send">ارسال ✨</button>
+        <button class="secondary" id="mic">🎙️ صحبت</button>
+        <button class="secondary" id="upload">📎 انتخاب عکس</button>
+        <input type="file" id="file" accept="image/*" class="hidden">
+      </div>
+    </div>
+    <div class="hint" id="hint">برای شروع، پیام خودت را بنویس و ارسال کن.</div>
+  </main>
+</div>
+<footer>Arash AI · ساخته شده با هوش مصنوعی</footer>
+</div>
 
 <script>
 const API_URL="https://arash-ai-api.arashidearashid.workers.dev/";
 
-const messages=document.getElementById("messages");
+const chat=document.getElementById("chat");
 const promptBox=document.getElementById("prompt");
-const sendBtn=document.getElementById("sendBtn");
-const typing=document.getElementById("typing");
-const language=document.getElementById("language");
+const sendButton=document.getElementById("send");
+const hint=document.getElementById("hint");
+const fileInput=document.getElementById("file");
+let mode="chat";
+let selectedImage=null;
 
-function addMessage(text,who){
- const item=document.createElement("div");
- item.className="message "+who;
- item.textContent=text;
- messages.appendChild(item);
- messages.scrollTop=messages.scrollHeight;
- if(who==="bot"){
-  const tools=document.createElement("div");
-  tools.className="msg-tools";
-  const speak=document.createElement("button");
-  speak.textContent="🔊 خواندن پاسخ";
-  speak.onclick=()=>speakText(text);
-  tools.appendChild(speak);
-  item.appendChild(tools);
+const hints={
+ chat:"با آرش گفت‌وگو کن و هر سؤالی داری بپرس.",
+ image:"توضیح تصویر دلخواهت را بنویس؛ مثلاً یک پسر انیمه‌ای کنار دریا.",
+ translate:"متن را بنویس و زبان مقصد را مشخص کن؛ مثلاً به اسپانیایی ترجمه کن.",
+ code:"درخواست برنامه‌نویسی یا کد خودت را بنویس.",
+ video:"ساخت ویدئو هنوز به اتصال سرویس ویدئوساز نیاز دارد.",
+ music:"ساخت موسیقی هنوز به اتصال سرویس موسیقی نیاز دارد.",
+ voice:"برای صحبت، دکمه میکروفون را بزن."
+};
+
+function addMessage(text,type="bot",image=null){
+ const div=document.createElement("div");
+ div.className="message "+type;
+ div.textContent=text;
+ if(image){
+   const img=document.createElement("img");
+   img.src=image;
+   img.alt="تصویر ساخته‌شده";
+   div.appendChild(img);
  }
- return item;
+ chat.appendChild(div);
+ chat.scrollTop=chat.scrollHeight;
 }
 
-function speakText(text){
- if(!("speechSynthesis" in window)){alert("خواندن صوتی در این مرورگر پشتیبانی نمی‌شود.");return;}
- speechSynthesis.cancel();
- const utterance=new SpeechSynthesisUtterance(text);
- utterance.lang=language.value==="fa"?"fa-IR":language.value;
- speechSynthesis.speak(utterance);
-}
+document.querySelectorAll(".tool[data-mode]").forEach(btn=>{
+ btn.addEventListener("click",()=>{
+   document.querySelectorAll(".tool[data-mode]").forEach(x=>x.classList.remove("active"));
+   btn.classList.add("active");
+   mode=btn.dataset.mode;
+   hint.textContent=hints[mode];
+   const placeholders={
+     chat:"هر سؤالی داری بنویس...",
+     image:"تصویری که می‌خواهی بسازم را توصیف کن...",
+     translate:"متن و زبان مقصد را بنویس...",
+     code:"چه برنامه یا کدی می‌خواهی؟",
+     video:"ایده ویدئوی مورد نظرت را بنویس...",
+     music:"سبک و موضوع موسیقی را بنویس...",
+     voice:"برای گفت‌وگوی صوتی از میکروفون استفاده کن..."
+   };
+   promptBox.placeholder=placeholders[mode];
+ });
+});
 
-async function sendMessage(){
+document.getElementById("clearChat").addEventListener("click",()=>{
+ chat.innerHTML="";
+ addMessage("گفت‌وگوی تازه شروع شد! چه کمکی از من برمی‌آید؟");
+});
+
+document.getElementById("upload").addEventListener("click",()=>fileInput.click());
+fileInput.addEventListener("change",()=>{
+ const file=fileInput.files[0];
+ if(!file)return;
+ if(!file.type.startsWith("image/")){
+   addMessage("لطفاً یک فایل تصویری انتخاب کن.");
+   return;
+ }
+ const reader=new FileReader();
+ reader.onload=()=>{
+   selectedImage=reader.result;
+   addMessage("عکس انتخاب شد. فعلاً می‌توانی آن را ببینی؛ قابلیت تحلیل عکس باید جداگانه به سرویس متصل شود.","user",selectedImage);
+ };
+ reader.readAsDataURL(file);
+});
+
+async function send(){
  const text=promptBox.value.trim();
  if(!text)return;
+
+ if(mode==="video"||mode==="music"){
+   addMessage(text,"user");
+   addMessage(mode==="video"
+    ?"ساخت واقعی ویدئو هنوز فعال نیست. برای فعال شدن آن باید سرویس تولید ویدئو به آرش AI متصل شود."
+    :"ساخت واقعی موسیقی هنوز فعال نیست. برای فعال شدن آن باید سرویس تولید موسیقی به آرش AI متصل شود.");
+   promptBox.value="";
+   return;
+ }
+
  addMessage(text,"user");
  promptBox.value="";
- promptBox.style.height="48px";
- sendBtn.disabled=true;
- typing.style.display="block";
+ sendButton.disabled=true;
+ sendButton.textContent="در حال انجام...";
+
  try{
-  let languageNote={
-   fa:"فارسی",en:"English",ar:"العربية",de:"Deutsch",
-   fr:"Français",es:"Español",it:"Italiano",ru:"Русский",
-   tr:"Türkçe",hi:"Hindi",zh:"Chinese",ja:"Japanese"
-  };
-  const fullPrompt="Please answer in "+languageNote[language.value]+". "+text;
-  const response=await fetch(API_URL,{
-   method:"POST",
-   headers:{"Content-Type":"application/json"},
-   body:JSON.stringify({prompt:fullPrompt})
-  });
-  const raw=await response.text();
-  let data;
-  try{data=JSON.parse(raw);}
-  catch(e){throw new Error("پاسخ سرور قابل خواندن نیست: "+raw.slice(0,180));}
-  if(!response.ok)throw new Error(data.error||"خطای سرور: "+response.status);
-  if(data.error)throw new Error(data.error);
-  addMessage(data.reply||"پاسخی دریافت نشد.","bot");
+   let action=mode==="image"?"image":"chat";
+   let requestText=text;
+
+   if(mode==="translate"){
+     requestText="این متن را ترجمه کن. زبان مقصد را از درخواست کاربر تشخیص بده و فقط ترجمه را ارائه کن:\n"+text;
+   }
+   if(mode==="code"){
+     requestText="در نقش یک برنامه‌نویس حرفه‌ای به این درخواست پاسخ بده و در صورت نیاز کد کامل ارائه کن:\n"+text;
+   }
+
+   const response=await fetch(API_URL,{
+     method:"POST",
+     headers:{"Content-Type":"application/json"},
+     body:JSON.stringify({action:action,prompt:requestText})
+   });
+
+   const data=await response.json();
+
+   if(!response.ok||data.success===false){
+     throw new Error(data.error||"پاسخی از سرور دریافت نشد.");
+   }
+
+   if(action==="image"){
+     if(!data.image)throw new Error("تصویر از سرور دریافت نشد.");
+     addMessage(data.message||"تصویر آماده شد ✨","bot",data.image);
+   }else{
+     addMessage(data.reply||data.response||data.text||"پاسخی دریافت نشد.");
+   }
  }catch(error){
-  addMessage("متأسفم، ارتباط با سرور با مشکل روبه‌رو شد.\n"+error.message,"bot");
+   addMessage("مشکلی پیش آمد: "+error.message+"\nاتصال اینترنت و سرویس آرش AI را بررسی کن.");
  }finally{
-  typing.style.display="none";
-  sendBtn.disabled=false;
-  promptBox.focus();
+   sendButton.disabled=false;
+   sendButton.textContent="ارسال ✨";
  }
 }
 
-sendBtn.addEventListener("click",sendMessage);
+sendButton.addEventListener("click",send);
 promptBox.addEventListener("keydown",e=>{
- if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendMessage();}
-});
-promptBox.addEventListener("input",()=>{
- promptBox.style.height="48px";
- promptBox.style.height=Math.min(promptBox.scrollHeight,130)+"px";
-});
-
-document.getElementById("clearBtn").addEventListener("click",()=>{
- messages.innerHTML="";
- addMessage("گفتگوی تازه شروع شد! ✨ چه کاری برایت انجام بدهم؟","bot");
+ if(e.key==="Enter"&&!e.shiftKey){
+   e.preventDefault();
+   send();
+ }
 });
 
-function setColor(color){
- document.documentElement.style.setProperty("--accent",color);
- document.getElementById("customColor").value=color;
-}
-document.querySelectorAll(".swatch").forEach(btn=>{
- btn.addEventListener("click",()=>setColor(btn.dataset.color));
-});
-document.getElementById("customColor").addEventListener("input",e=>setColor(e.target.value));
-
-const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
-const micBtn=document.getElementById("micBtn");
-if(SpeechRecognition){
+document.getElementById("mic").addEventListener("click",()=>{
+ const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
+ if(!SpeechRecognition){
+   addMessage("مرورگر گوشی از تشخیص گفتار پشتیبانی نمی‌کند. می‌توانی از میکروفون صفحه‌کلید گوشی استفاده کنی.");
+   return;
+ }
  const recognition=new SpeechRecognition();
  recognition.lang="fa-IR";
+ recognition.interimResults=false;
  recognition.onresult=e=>{
-  promptBox.value+=e.results[0][0].transcript;
-  promptBox.dispatchEvent(new Event("input"));
+   promptBox.value=e.results[0][0].transcript;
  };
- recognition.onerror=()=>{micBtn.textContent="🎙";};
- recognition.onend=()=>{micBtn.textContent="🎙";};
- micBtn.addEventListener("click",()=>{
-  recognition.lang=language.value==="fa"?"fa-IR":language.value;
-  micBtn.textContent="🔴";
-  recognition.start();
- });
-}else{
- micBtn.addEventListener("click",()=>alert("میکروفون گفتار در این مرورگر پشتیبانی نمی‌شود."));
-}
-const makeImageBtn = document.getElementById("makeImage");
-const imagePromptBox = document.getElementById("imagePrompt");
-const imageStyleBox = document.getElementById("imageStyle");
-const imageStatus = document.getElementById("imageStatus");
-const generatedImage = document.getElementById("generatedImage");
-
-makeImageBtn.addEventListener("click", async () => {
-  const prompt = imagePromptBox.value.trim();
-
-  if (!prompt) {
-    imageStatus.textContent = "اول توضیح تصویر را بنویس.";
-    return;
-  }
-
-  makeImageBtn.disabled = true;
-  imageStatus.textContent = "✨ آرش در حال خلق تصویر توست...";
-  generatedImage.style.display = "none";
-
-  try {
-    const response = await fetch(API_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        action: "image",
-        prompt: imageStyleBox.value + ", " + prompt
-      })
-    });
-
-    const raw = await response.text();
-    let data;
-
-    try {
-      data = JSON.parse(raw);
-    } catch {
-      throw new Error("پاسخ سرور قابل خواندن نیست.");
-    }
-
-    if (!response.ok || data.error) {
-      throw new Error(data.error || "ساخت تصویر ناموفق بود.");
-    }
-
-    if (!data.image) {
-      throw new Error("تصویری از سرور دریافت نشد.");
-    }
-
-    generatedImage.src = data.image;
-    generatedImage.style.display = "block";
-    imageStatus.textContent = "🎉 تصویر تو آماده شد!";
-
-  } catch (error) {
-    imageStatus.textContent = "خطا: " + error.message;
-  } finally {
-    makeImageBtn.disabled = false;
-  }
+ recognition.onerror=()=>{
+   addMessage("میکروفون فعال نشد. اجازه دسترسی میکروفون مرورگر را بررسی کن.");
+ };
+ recognition.start();
 });
- 
+
+if("speechSynthesis" in window){
+ chat.addEventListener("dblclick",e=>{
+   const message=e.target.closest(".message");
+   if(!message)return;
+   const utterance=new SpeechSynthesisUtterance(message.textContent);
+   utterance.lang="fa-IR";
+   speechSynthesis.speak(utterance);
+ });
+}
 </script>
 </body>
 </html>
