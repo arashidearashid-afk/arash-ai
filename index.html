@@ -3,287 +3,315 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#030817">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="theme-color" content="#020817">
 <title>Arash AI | دستیار هوشمند آرش</title>
 
 <style>
 *{box-sizing:border-box}
 :root{
---bg:#020817;
---panel:#07152d;
---cyan:#00eaff;
---green:#00ff9d;
---blue:#087bff;
---pink:#ff24d8;
---purple:#873cff;
---gold:#ffbd25;
+--green:#00ff9d;--cyan:#00eaff;
+--pink:#ff24d8;--purple:#873cff;
+--gold:#ffc229;--blue:#087bff;
 }
 body{
-margin:0;color:white;background:var(--bg);
-font-family:Tahoma,Arial,sans-serif;
+margin:0;color:white;font-family:Tahoma,Arial,sans-serif;
+background:
+radial-gradient(ellipse at 75% 25%,#073c6477,transparent 45%),
+radial-gradient(ellipse at 15% 80%,#152d6377,transparent 45%),
+#020817;
 min-height:100vh;overflow-x:hidden;
-background-image:
-radial-gradient(ellipse at 75% 30%,#073e6c77,transparent 40%),
-radial-gradient(ellipse at 15% 80%,#102c6c88,transparent 40%),
-linear-gradient(135deg,#020817,#06152d,#020817);
 }
 body:before{
 content:"";position:fixed;inset:0;pointer-events:none;
+z-index:-1;opacity:.65;
 background-image:
-radial-gradient(2px 2px at 10% 20%,#fff,transparent),
-radial-gradient(2px 2px at 40% 70%,#00eaff,transparent),
-radial-gradient(2px 2px at 80% 15%,#fff,transparent),
-radial-gradient(2px 2px at 65% 85%,#00ff9d,transparent);
+radial-gradient(2px 2px at 15% 20%,white,transparent),
+radial-gradient(2px 2px at 75% 60%,#00eaff,transparent),
+radial-gradient(2px 2px at 45% 85%,white,transparent);
 background-size:190px 170px;
-opacity:.6;z-index:-1;
 }
-button,input,textarea{font:inherit}
-button{cursor:pointer;color:white}
-.neon{
-border:1px solid var(--cyan);
-box-shadow:0 0 9px #00eaff88,inset 0 0 12px #00eaff22;
-}
+button,input,textarea,select{font:inherit}
+button{color:white;cursor:pointer}
 header{
-display:flex;align-items:center;justify-content:space-between;
-gap:15px;padding:14px 22px;
-border-bottom:1px solid #00eaff66;
-background:#030b1deF;position:relative;z-index:2;
+display:flex;justify-content:space-between;align-items:center;
+gap:12px;padding:12px 18px;
+border-bottom:1px solid #00eaff77;
+background:#030b1dee;
 }
-.brand{display:flex;align-items:center;gap:12px}
+.brand{display:flex;align-items:center;gap:10px}
 .logo{
-font-size:65px;font-weight:bold;color:#00ff9d;
-text-shadow:0 0 10px #00ff9d,0 0 30px #00ff9d;
+font-size:65px;font-weight:bold;color:var(--green);
+text-shadow:0 0 12px var(--green),0 0 35px var(--green);
 }
-.brand-name{
-font-size:clamp(25px,4vw,44px);font-weight:bold;
-font-style:italic;color:#00ff9d;
-text-shadow:0 0 15px #00ff9d;
+.brandname{
+font-size:clamp(24px,4vw,43px);
+font-weight:bold;font-style:italic;color:var(--green);
+text-shadow:0 0 15px var(--green);
 }
-.brand small{display:block;font-size:14px;color:white}
-.topnav{display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+.brand small{display:block;font-size:13px}
+.topnav{display:flex;gap:7px;flex-wrap:wrap}
 .topnav button{
-background:#08172c;border:1px solid #087b9c;
-padding:11px 17px;border-radius:25px;
+background:#08172c;border:1px solid #126b8d;
+border-radius:22px;padding:10px 13px;
 }
 .online{color:var(--green)!important}
+
+/* چیدمان اصلی: منو چپ، محتوای سایت راست */
 .layout{
-display:grid;grid-template-columns:300px minmax(0,1fr);
-gap:13px;padding:12px;max-width:1700px;margin:auto;
+display:grid;
+grid-template-columns:245px minmax(0,1fr);
+direction:ltr;
+gap:12px;
+padding:12px;
+max-width:1700px;
+margin:auto;
+align-items:start;
 }
 .sidebar,.main{
-border:1px solid #00dfff88;border-radius:25px;
-background:linear-gradient(145deg,#06142cf5,#02091cf5);
-box-shadow:0 0 20px #00cfff30;
+direction:rtl;
+border:1px solid #00dfff99;
+border-radius:22px;
+background:linear-gradient(145deg,#07152cf5,#02091df5);
+box-shadow:0 0 20px #00cfff33;
+min-width:0;
 }
-.sidebar{padding:12px}
+.sidebar{padding:11px}
+.main{padding:12px;overflow:hidden}
 .side-title{
-padding:15px;text-align:center;border-radius:17px;
-background:#030d22;border:1px solid #00dfff55;
-margin-bottom:12px;font-weight:bold;
+text-align:center;padding:14px 5px;
+border:1px solid var(--cyan);
+border-radius:15px;margin-bottom:12px;
+font-weight:bold;background:#06132b;
 }
 .menu{
-display:flex;align-items:center;gap:13px;
-width:100%;padding:13px 12px;margin:5px 0;
-border-radius:17px;background:#050e25;
-border:1px solid #17466a;text-align:right;
-transition:.25s;font-weight:bold;
+width:100%;display:flex;align-items:center;
+gap:10px;padding:12px 9px;margin:5px 0;
+border:1px solid #19446b;border-radius:15px;
+background:#040e23;text-align:right;
+font-weight:bold;transition:.25s;
 }
+.menu .ico{font-size:25px;min-width:34px;text-align:center}
 .menu:hover,.menu.active{
-background:linear-gradient(100deg,#06452f,#071a3b);
 border-color:var(--green);
-box-shadow:0 0 16px #00ff9d88;
-transform:translateX(-3px);
+background:linear-gradient(100deg,#06452f,#071a3b);
+box-shadow:0 0 14px #00ff9d77;
 }
-.menu .ico{font-size:26px;width:38px;text-align:center}
 .premium{
-margin-top:18px;padding:20px;text-align:center;
-border-radius:20px;border:1px solid var(--gold);
-box-shadow:0 0 18px #ffbd2566;color:var(--gold);
+margin-top:15px;text-align:center;padding:17px 5px;
+border:1px solid var(--gold);border-radius:18px;
+color:var(--gold);box-shadow:0 0 15px #ffbd2555;
 }
-.main{padding:13px;min-width:0;position:relative;overflow:hidden}
+.premium small{color:white}
+
+/* بخش اصلی */
 .main-grid{
-display:grid;grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr);
+display:grid;
+grid-template-columns:minmax(0,1.15fr) minmax(270px,.85fr);
 gap:12px;min-height:590px;
 }
-.workarea{display:flex;flex-direction:column;gap:15px;min-width:0}
+.workarea{display:flex;flex-direction:column;gap:13px;min-width:0}
 .welcome{
-padding:20px;border-radius:23px;
+padding:18px;border-radius:20px;
 background:linear-gradient(120deg,#14294c,#07142c);
-border:1px solid #1d83bd;
-box-shadow:0 0 20px #008cff44;
-font-size:19px;line-height:2;
+border:1px solid #168ac5;
+box-shadow:0 0 17px #008cff33;
+font-size:18px;line-height:2;
 }
-.welcome strong{color:#00ffbd}
+.welcome strong{color:var(--green)}
 .cards{
 display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
-gap:11px;
+gap:10px;
 }
 .tool{
-min-height:135px;padding:14px 7px;
-border-radius:20px;text-align:center;
+min-width:0;min-height:126px;
+padding:12px 5px;text-align:center;
+border:1px solid var(--cyan);border-radius:18px;
 background:linear-gradient(145deg,#071c3d,#080b26);
-border:1px solid var(--cyan);
-box-shadow:0 0 12px #00dfff55;
+box-shadow:0 0 12px #00dfff44;
 transition:.25s;
 }
-.tool:hover{transform:translateY(-4px);filter:brightness(1.3)}
-.tool .ico{font-size:35px;display:block;margin-bottom:9px}
-.tool strong{display:block;font-size:15px}
-.tool small{display:block;color:#b9d6f5;margin-top:7px}
+.tool:hover{transform:translateY(-3px);filter:brightness(1.3)}
+.tool .ico{display:block;font-size:33px;margin-bottom:8px}
+.tool strong{display:block;font-size:14px}
+.tool small{display:block;font-size:11px;color:#b9d6f5;margin-top:7px}
 .tool button{
-margin-top:9px;border:0;border-radius:20px;
-padding:7px 13px;background:#064f9b;
+margin-top:8px;border:0;border-radius:20px;
+padding:6px 12px;background:#07518c;font-size:12px;
 }
-.green{border-color:var(--green);box-shadow:0 0 14px #00ff9d55}
-.pink{border-color:var(--pink);box-shadow:0 0 14px #ff24d855}
-.purple{border-color:var(--purple);box-shadow:0 0 14px #873cff66}
-.gold{border-color:var(--gold);box-shadow:0 0 14px #ffbd2555}
+.green{border-color:var(--green);box-shadow:0 0 12px #00ff9d44}
+.pink{border-color:var(--pink);box-shadow:0 0 12px #ff24d844}
+.purple{border-color:var(--purple);box-shadow:0 0 12px #873cff55}
+.gold{border-color:var(--gold);box-shadow:0 0 12px #ffc22944}
+
+/* آرش و میکروفون */
 .robot{
-position:relative;display:flex;flex-direction:column;
+display:flex;flex-direction:column;
 align-items:center;justify-content:flex-start;
-min-height:520px;padding:10px;
+padding:7px;min-width:0;
+}
+.robot-name{
+font-size:25px;color:var(--green);
+font-weight:bold;text-shadow:0 0 12px var(--green);
+margin:8px;
 }
 .avatar-ring{
-width:min(100%,390px);aspect-ratio:1/1;
-border-radius:50%;padding:8px;
+width:min(100%,350px);aspect-ratio:1;
+padding:7px;border-radius:50%;
 border:3px solid var(--green);
-box-shadow:0 0 18px var(--green),0 0 55px #00eaff88;
-animation:ring 7s linear infinite;
-overflow:hidden;position:relative;
+box-shadow:0 0 18px var(--green),0 0 45px #00eaff66;
+animation:hue 8s linear infinite;
+position:relative;overflow:hidden;
+background:radial-gradient(circle,#125274,#020817);
 }
 .avatar-ring img{
 width:100%;height:100%;object-fit:cover;
 border-radius:50%;
 }
 .avatar-fallback{
-position:absolute;inset:0;display:flex;
-align-items:center;justify-content:center;
-font-size:130px;color:#00ff9d;
-background:radial-gradient(circle,#124a68,#020817);
-}
-.robot-name{
-font-size:25px;font-weight:bold;color:var(--green);
-text-shadow:0 0 12px var(--green);margin:10px;
+position:absolute;inset:0;
+display:flex;align-items:center;justify-content:center;
+font-size:120px;color:var(--green);
 }
 .mic-box{
-width:100%;max-width:440px;
-padding:15px;border-radius:22px;
-border:1px solid var(--green);
-background:#020c20ed;
-box-shadow:0 0 18px #00ff9d66;
-text-align:center;margin-top:12px;
+width:100%;max-width:420px;
+margin-top:13px;padding:12px;
+border:1px solid var(--green);border-radius:20px;
+background:#020c20ed;box-shadow:0 0 18px #00ff9d55;
+text-align:center;
 }
 .mic-area{
-height:100px;display:flex;align-items:center;
-justify-content:center;gap:12px;
+height:95px;display:flex;
+align-items:center;justify-content:center;gap:7px;
 }
 .mic-button{
-width:85px;height:85px;border-radius:50%;
+width:75px;height:75px;border-radius:50%;
 border:3px solid var(--green);
 background:#061b2c;color:var(--green);
-font-size:39px;
-box-shadow:0 0 20px var(--green);
+font-size:36px;box-shadow:0 0 20px var(--green);
 }
-.mic-button.listening{
-animation:pulse .7s infinite alternate;
-background:#07573b;
-}
-.waves{height:60px;display:flex;gap:3px;align-items:center}
+.mic-button.listening{animation:pulse .7s infinite alternate}
+.waves{display:flex;align-items:center;gap:3px;height:60px}
 .waves i{
-width:4px;height:12px;border-radius:5px;
+width:3px;height:12px;border-radius:5px;
 background:linear-gradient(to top,var(--cyan),var(--pink),var(--green));
 box-shadow:0 0 7px var(--cyan);
 }
 .waves.active i{animation:wave .55s infinite alternate}
 .waves i:nth-child(3n){animation-delay:.15s}
 .waves i:nth-child(3n+1){animation-delay:.3s}
-.mic-controls{
-display:flex;gap:9px;margin-top:10px;
+.mic-controls{display:flex;gap:8px;margin-top:10px}
+.mic-controls select,.mic-controls button{
+width:50%;min-width:0;padding:10px;
+border:1px solid var(--green);border-radius:13px;
+background:#07172c;color:white;
 }
-.mic-controls select,.mic-controls input{
-min-width:0;width:50%;background:#07172c;color:white;
-border:1px solid var(--green);border-radius:14px;padding:12px;
-}
+
+/* گفتگو */
 .chatbox{
-margin-top:auto;border:1px solid var(--cyan);
-border-radius:22px;background:#020b20;
-padding:10px;box-shadow:0 0 17px #00cfff66;
+margin-top:auto;padding:9px;border:1px solid var(--cyan);
+border-radius:19px;background:#020b20;
+box-shadow:0 0 15px #00cfff55;
 }
 .messages{
-height:190px;overflow-y:auto;padding:8px;
-display:flex;flex-direction:column;gap:10px;
+height:175px;overflow-y:auto;padding:8px;
+display:flex;flex-direction:column;gap:9px;
 }
 .msg{
-padding:12px 15px;border-radius:17px;
-max-width:90%;line-height:1.9;white-space:pre-wrap;
-overflow-wrap:anywhere;
+max-width:94%;padding:11px 13px;
+border-radius:15px;line-height:1.9;
+white-space:pre-wrap;overflow-wrap:anywhere;
 }
 .user{align-self:flex-start;background:#063e72;border:1px solid #00bfff}
-.bot{align-self:flex-end;background:#10203e;border:1px solid #00ff9d}
+.bot{align-self:flex-end;background:#10203e;border:1px solid var(--green)}
 .chat-input{
-display:flex;gap:7px;align-items:center;
-background:#07152c;border-radius:16px;padding:7px;
+display:flex;gap:5px;align-items:center;
+background:#07152c;border-radius:14px;padding:5px;
 }
 .chat-input textarea{
-width:100%;resize:none;min-height:48px;max-height:120px;
-background:transparent;border:0;color:white;outline:none;
-padding:12px;
+flex:1;min-width:0;resize:none;min-height:44px;
+max-height:100px;background:transparent;
+border:0;color:white;outline:none;padding:10px;
 }
 .action{
-border:0;border-radius:13px;background:#102440;
-padding:12px;font-size:20px;
+border:0;border-radius:12px;
+background:#102440;padding:10px;font-size:19px;
 }
-.send{
-background:#00c879;color:#001b14;
-font-size:23px;padding:12px 18px;
-box-shadow:0 0 15px #00ff9d77;
-}
-.status{
-color:#a9cbe9;text-align:center;font-size:12px;
-margin-top:7px;
-}
+.send{background:#00c879;color:#001b14;font-size:22px}
+.status{text-align:center;color:#a9cbe9;font-size:11px;margin-top:6px}
 .footer{
 display:grid;grid-template-columns:repeat(5,1fr);
-gap:9px;margin-top:13px;
+gap:8px;margin-top:12px;
 }
 .footer div{
-padding:15px 5px;text-align:center;border-radius:17px;
-background:#07162e;border:1px solid #14628c;
-font-size:13px;
+padding:13px 4px;text-align:center;
+border-radius:15px;background:#07162e;
+border:1px solid #14628c;font-size:12px;
 }
-.footer b{display:block;font-size:24px;margin-bottom:7px}
+.footer b{display:block;font-size:23px;margin-bottom:6px}
 .toast{
-position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+position:fixed;bottom:15px;left:50%;
+transform:translateX(-50%);
 background:#102b43;border:1px solid var(--cyan);
-padding:13px 20px;border-radius:15px;z-index:10;
-display:none;max-width:90%;text-align:center;
+padding:12px 17px;border-radius:14px;
+z-index:20;display:none;max-width:90%;
+text-align:center;
 }
-@keyframes wave{to{height:55px}}
-@keyframes pulse{to{box-shadow:0 0 35px var(--green);transform:scale(1.06)}}
-@keyframes ring{to{filter:hue-rotate(360deg)}}
+@keyframes wave{to{height:52px}}
+@keyframes pulse{to{box-shadow:0 0 35px var(--green);transform:scale(1.05)}}
+@keyframes hue{to{filter:hue-rotate(360deg)}}
+
+/* موبایل: ستون منو همیشه سمت چپ باقی می‌ماند */
 @media(max-width:850px){
-.layout{grid-template-columns:1fr}
-.sidebar{order:2}
-.main{order:1}
-.main-grid{grid-template-columns:1fr}
-.robot{grid-row:1;min-height:unset}
-.avatar-ring{width:min(70vw,300px)}
-.workarea{grid-row:2}
-.cards{grid-template-columns:repeat(2,minmax(0,1fr))}
-.footer{grid-template-columns:repeat(3,1fr)}
-.topnav button{padding:8px;font-size:12px}
+ header{padding:8px;gap:5px}
+ .logo{font-size:42px}
+ .brandname{font-size:23px}
+ .brand small{font-size:10px}
+ .topnav{gap:4px}
+ .topnav button{font-size:10px;padding:7px}
+ .layout{
+   grid-template-columns:94px minmax(0,1fr);
+   direction:ltr;
+   gap:5px;padding:5px;
+ }
+ .sidebar{padding:5px}
+ .main{padding:6px;min-width:0}
+ .side-title{font-size:10px;padding:10px 1px}
+ .menu{
+   flex-direction:column;
+   text-align:center;
+   justify-content:center;
+   gap:3px;padding:9px 2px;
+   font-size:9px;line-height:1.5;
+   border-radius:11px;
+ }
+ .menu .ico{font-size:22px;min-width:0}
+ .premium{font-size:9px;padding:9px 2px}
+ .main-grid{grid-template-columns:minmax(0,1fr);min-height:0}
+ .robot{grid-row:1;min-height:0}
+ .workarea{grid-row:2}
+ .robot-name{font-size:19px}
+ .avatar-ring{width:min(62vw,230px)}
+ .mic-box{padding:8px;margin-top:9px}
+ .mic-button{width:61px;height:61px;font-size:29px}
+ .mic-area{height:75px}
+ .cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+ .tool{min-height:112px;padding:8px 3px}
+ .tool .ico{font-size:28px}
+ .tool strong{font-size:12px}
+ .tool small{font-size:10px}
+ .tool button{font-size:10px;padding:5px 8px}
+ .welcome{font-size:13px;padding:10px;line-height:1.9}
+ .messages{height:145px}
+ .footer{grid-template-columns:repeat(2,1fr)}
+ .footer div{font-size:10px;padding:9px 2px}
 }
-@media(max-width:420px){
-header{padding:9px}
-.logo{font-size:43px}
-.brand-name{font-size:24px}
-.topnav button{font-size:10px;padding:7px}
-.cards{gap:7px}
-.tool{min-height:125px;padding:10px 4px}
-.tool strong{font-size:13px}
-.footer{grid-template-columns:repeat(2,1fr)}
-.messages{height:170px}
+@media(max-width:360px){
+ .layout{grid-template-columns:82px minmax(0,1fr)}
+ .topnav button{font-size:9px;padding:6px}
+ .menu{font-size:8px}
+ .cards{gap:4px}
+ .tool strong{font-size:11px}
 }
 </style>
 </head>
@@ -292,13 +320,15 @@ header{padding:9px}
 <header>
  <div class="brand">
   <div class="logo">Ⓐ</div>
-  <div><div class="brand-name">Arash AI</div>
-  <small>Your Smart Assistant</small></div>
+  <div>
+   <div class="brandname">Arash AI</div>
+   <small>Your Smart Assistant</small>
+  </div>
  </div>
  <nav class="topnav">
   <button onclick="showToast('خانه Arash AI')">🏠 خانه</button>
-  <button onclick="showToast('بخش علاقه‌مندی‌ها به‌زودی فعال می‌شود')">⭐ علاقه‌مندی‌ها</button>
-  <button onclick="showToast('تنظیمات در حال توسعه است')">⚙️ تنظیمات</button>
+  <button onclick="showToast('علاقه‌مندی‌ها')">⭐ علاقه‌مندی‌ها</button>
+  <button onclick="showToast('تنظیمات')">⚙️ تنظیمات</button>
   <button onclick="showToast('دستیار هوشمند آرش')">ⓘ درباره ما</button>
   <button class="online">● آنلاین</button>
  </nav>
@@ -306,75 +336,82 @@ header{padding:9px}
 
 <div class="layout">
 
+<!-- ستون چپ: امکانات -->
 <aside class="sidebar">
- <div class="side-title">▦ انتخاب قابلیت‌ها</div>
-
- <button class="menu active" onclick="setMode('chat')"><span class="ico">💬</span>گفت‌وگوی هوشمند</button>
- <button class="menu" onclick="setMode('doctor')"><span class="ico">🩺</span>دستیار پزشک</button>
- <button class="menu" onclick="setMode('video')"><span class="ico">🎬</span>ساخت ویدئو</button>
- <button class="menu" onclick="setMode('animation')"><span class="ico">🎨</span>انیمیشن و کارتون</button>
- <button class="menu" onclick="setMode('music')"><span class="ico">🎵</span>ساخت موسیقی</button>
- <button class="menu" onclick="setMode('image')"><span class="ico">🖼️</span>تولید عکس</button>
- <button class="menu" onclick="setMode('translate')"><span class="ico">🌐</span>ترجمه زبان‌ها</button>
- <button class="menu" onclick="setMode('search')"><span class="ico">🔎</span>جست‌وجوی وب</button>
- <button class="menu" onclick="setMode('code')"><span class="ico">💻</span>تولید کد و برنامه</button>
- <button class="menu" onclick="setMode('files')"><span class="ico">📁</span>مدیریت فایل‌ها</button>
- <button class="menu" onclick="showToast('تنظیمات پیشرفته به‌زودی')"><span class="ico">⚙️</span>تنظیمات پیشرفته</button>
-
- <div class="premium">👑 نسخه حرفه‌ای<br><small>امکانات بیشتر در آینده</small></div>
+ <div class="side-title">▦ امکانات</div>
+ <button class="menu active" onclick="setMode('chat',this)"><span class="ico">💬</span>گفت‌وگو</button>
+ <button class="menu" onclick="setMode('doctor',this)"><span class="ico">🩺</span>دستیار پزشک</button>
+ <button class="menu" onclick="setMode('video',this)"><span class="ico">🎬</span>ساخت ویدئو</button>
+ <button class="menu" onclick="setMode('animation',this)"><span class="ico">🎨</span>انیمیشن</button>
+ <button class="menu" onclick="setMode('music',this)"><span class="ico">🎵</span>ساخت موسیقی</button>
+ <button class="menu" onclick="setMode('image',this)"><span class="ico">🖼️</span>تولید عکس</button>
+ <button class="menu" onclick="setMode('translate',this)"><span class="ico">🌐</span>ترجمه</button>
+ <button class="menu" onclick="setMode('search',this)"><span class="ico">🔎</span>جست‌وجو</button>
+ <button class="menu" onclick="setMode('code',this)"><span class="ico">💻</span>تولید کد</button>
+ <button class="menu" onclick="setMode('files',this)"><span class="ico">📁</span>فایل‌ها</button>
+ <button class="menu" onclick="showToast('تنظیمات پیشرفته')"><span class="ico">✨</span>سایر امکانات</button>
+ <div class="premium">👑 حرفه‌ای<br><small>امکانات بیشتر</small></div>
 </aside>
 
+<!-- ستون راست: فضای کار -->
 <main class="main">
  <div class="main-grid">
 
   <section class="workarea">
    <div class="welcome">
-    <strong>👋 سلام حسین عزیز!</strong><br>
+    <strong>👋 سلام حسین!</strong><br>
     من آرش هستم، دستیار هوشمند شما.<br>
     چه کاری می‌توانم برایت انجام بدهم؟
    </div>
 
    <div class="cards">
     <div class="tool green" onclick="setMode('doctor')">
-     <span class="ico">🩺</span><strong>دستیار پزشک</strong>
-     <small>مشاوره و اطلاعات سلامت</small>
-     <button>شروع گفتگو</button>
+     <span class="ico">🩺</span>
+     <strong>دستیار پزشک</strong>
+     <small>اطلاعات سلامت</small>
+     <button>شروع</button>
     </div>
     <div class="tool" onclick="setMode('video')">
-     <span class="ico">🎬</span><strong>ساخت ویدئو</strong>
-     <small>تبدیل ایده به ویدئو</small>
-     <button>شروع ساخت</button>
+     <span class="ico">🎬</span>
+     <strong>ساخت ویدئو</strong>
+     <small>ایده تا ویدئو</small>
+     <button>شروع</button>
     </div>
     <div class="tool pink" onclick="setMode('animation')">
-     <span class="ico">🎨</span><strong>ساخت انیمیشن</strong>
-     <small>انیمیشن و کارتون</small>
-     <button>شروع ساخت</button>
+     <span class="ico">🎨</span>
+     <strong>انیمیشن و کارتون</strong>
+     <small>خلق شخصیت</small>
+     <button>شروع</button>
     </div>
     <div class="tool purple" onclick="setMode('music')">
-     <span class="ico">🎵</span><strong>ساخت موسیقی</strong>
-     <small>آهنگ و موزیک دلخواه</small>
-     <button>شروع ساخت</button>
+     <span class="ico">🎵</span>
+     <strong>ساخت موسیقی</strong>
+     <small>آهنگ دلخواه</small>
+     <button>شروع</button>
     </div>
     <div class="tool gold" onclick="setMode('image')">
-     <span class="ico">🖼️</span><strong>ساخت تصویر</strong>
-     <small>عکس‌های خلاقانه</small>
-     <button>شروع ساخت</button>
+     <span class="ico">🖼️</span>
+     <strong>تولید عکس</strong>
+     <small>تصویر هوشمند</small>
+     <button>شروع</button>
     </div>
     <div class="tool" onclick="setMode('translate')">
-     <span class="ico">🌍</span><strong>ترجمه هوشمند</strong>
+     <span class="ico">🌍</span>
+     <strong>ترجمه زبان‌ها</strong>
      <small>ترجمه چندزبانه</small>
-     <button>ترجمه کن</button>
+     <button>شروع</button>
     </div>
    </div>
 
    <div class="chatbox">
     <div class="messages" id="messages">
-     <div class="msg bot">سلام حسین! من آماده‌ام. چه کمکی از من برمی‌آید؟ 💚</div>
+     <div class="msg bot">سلام حسین! من آرش هستم. 💚</div>
     </div>
     <div class="chat-input">
      <button class="action" onclick="document.getElementById('fileInput').click()">📎</button>
-     <button class="action" onclick="document.getElementById('fileInput').click()">🖼️</button>
-     <input id="fileInput" type="file" accept="image/*,.pdf,.txt" hidden onchange="handleFile(this)">
+     <button class="action" onclick="document.getElementById('imageInput').click()">🖼️</button>
+     <input id="fileInput" type="file" hidden onchange="fileSelected(this)">
+     <input id="imageInput" type="file" accept="image/*" hidden onchange="fileSelected(this)">
      <textarea id="prompt" placeholder="پیام خود را بنویسید..." rows="1"></textarea>
      <button class="action send" id="sendBtn" onclick="sendMessage()">➤</button>
     </div>
@@ -393,11 +430,11 @@ header{padding:9px}
 
    <div class="mic-box">
     <div class="mic-area">
-     <div class="waves" id="wavesLeft"></div>
+     <div class="waves" id="leftWaves"></div>
      <button class="mic-button" id="micBtn" onclick="toggleMic()">🎙️</button>
-     <div class="waves" id="wavesRight"></div>
+     <div class="waves" id="rightWaves"></div>
     </div>
-    <div id="micStatus">برای صحبت کردن روی میکروفون کلیک کنید</div>
+    <div id="micStatus">برای صحبت روی میکروفون کلیک کنید</div>
     <div class="mic-controls">
      <select id="language">
       <option value="fa-IR">🇮🇷 فارسی</option>
@@ -408,11 +445,10 @@ header{padding:9px}
       <option value="ar-SA">🇸🇦 العربية</option>
       <option value="ru-RU">🇷🇺 Русский</option>
      </select>
-     <button class="action" onclick="toggleSpeech()" id="speechBtn">🔊 صدا</button>
+     <button onclick="toggleSpeech()" id="speechBtn">🔊 صدا</button>
     </div>
    </div>
   </section>
-
  </div>
 
  <div class="footer">
@@ -420,7 +456,7 @@ header{padding:9px}
   <div><b>🛡️</b>امن و مطمئن</div>
   <div><b>💎</b>کیفیت عالی</div>
   <div><b>🌐</b>پشتیبانی چندزبانه</div>
-  <div><b>💗</b>همیشه در کنار شما</div>
+  <div><b>💗</b>همیشه کنار شما</div>
  </div>
 </main>
 </div>
@@ -429,7 +465,6 @@ header{padding:9px}
 
 <script>
 const API_URL="https://arash-ai-api.arashidearashid.workers.dev";
-
 let currentMode="chat";
 let recognition=null;
 let listening=false;
@@ -439,198 +474,131 @@ const promptBox=document.getElementById("prompt");
 const messages=document.getElementById("messages");
 const statusBox=document.getElementById("status");
 
-function showToast(message){
+function showToast(s){
  const t=document.getElementById("toast");
- t.textContent=message;t.style.display="block";
- setTimeout(()=>t.style.display="none",3000);
+ t.textContent=s;t.style.display="block";
+ clearTimeout(window.toastTimer);
+ window.toastTimer=setTimeout(()=>t.style.display="none",3000);
 }
-
-function addMessage(text,type){
+function addMessage(s,type){
  const d=document.createElement("div");
- d.className="msg "+type;
- d.textContent=text;
- messages.appendChild(d);
- messages.scrollTop=messages.scrollHeight;
- return d;
+ d.className="msg "+type;d.textContent=s;
+ messages.appendChild(d);messages.scrollTop=messages.scrollHeight;
 }
-
-const modes={
- chat:"گفت‌وگوی هوشمند",
- doctor:"دستیار پزشک",
- video:"ساخت ویدئو",
- animation:"ساخت انیمیشن",
- music:"ساخت موسیقی",
- image:"ساخت تصویر",
- translate:"ترجمه زبان‌ها",
- search:"جست‌وجوی وب",
- code:"تولید کد",
- files:"مدیریت فایل‌ها"
-};
-
-function setMode(mode){
+function setMode(mode,button){
  currentMode=mode;
  document.querySelectorAll(".menu").forEach(x=>x.classList.remove("active"));
- const btn=[...document.querySelectorAll(".menu")].find(x=>x.getAttribute("onclick")?.includes("'"+mode+"'"));
- if(btn)btn.classList.add("active");
-
- const prompts={
- chat:"پیامت را برای آرش بنویس...",
- doctor:"سؤال پزشکی خود را بنویس...",
- video:"ایده ویدئوی موردنظرت را بنویس...",
- animation:"انیمیشن موردنظرت را توضیح بده...",
- music:"سبک آهنگ و موضوع آن را بنویس...",
- image:"تصویری که می‌خواهی بسازی توصیف کن...",
- translate:"متن و زبان مقصد را مشخص کن...",
- search:"موضوع موردنظر برای جست‌وجو را بنویس...",
- code:"کد یا برنامه موردنظرت را توضیح بده...",
- files:"درباره فایل خود توضیح بده..."
+ if(button)button.classList.add("active");
+ const names={
+ chat:"گفت‌وگوی هوشمند",doctor:"دستیار پزشک",
+ video:"ساخت ویدئو",animation:"انیمیشن",
+ music:"ساخت موسیقی",image:"تولید عکس",
+ translate:"ترجمه",search:"جست‌وجوی وب",
+ code:"تولید کد",files:"فایل‌ها"
  };
- promptBox.placeholder=prompts[mode]||prompts.chat;
-
- if(["image","video","music","animation","search","files"].includes(mode)){
- showToast(modes[mode]+" انتخاب شد؛ اتصال سرویس اختصاصی این قابلیت هنوز تکمیل نشده است.");
- }else{
- showToast(modes[mode]+" انتخاب شد");
- }
- promptBox.focus();
+ const placeholders={
+ chat:"پیام خود را بنویسید...",
+ doctor:"سؤال پزشکی خود را بنویسید...",
+ video:"ایده ویدئو را بنویسید...",
+ animation:"انیمیشن دلخواه را توصیف کنید...",
+ music:"آهنگ موردنظر را توضیح دهید...",
+ image:"تصویری که می‌خواهید بسازید توصیف کنید...",
+ translate:"متن و زبان مقصد را بنویسید...",
+ search:"موضوع جست‌وجو را بنویسید...",
+ code:"برنامه موردنظر را توضیح دهید...",
+ files:"درباره فایل خود توضیح دهید..."
+ };
+ promptBox.placeholder=placeholders[mode]||placeholders.chat;
+ if(["video","animation","music","image","search","files"].includes(mode)){
+ showToast(names[mode]+" انتخاب شد؛ سرویس تولید یا جست‌وجوی اختصاصی هنوز متصل نشده است.");
+ }else showToast(names[mode]+" انتخاب شد");
 }
-
-function buildPrompt(text){
+function buildPrompt(s){
  if(currentMode==="doctor")
- return "به عنوان دستیار اطلاعات سلامت، با احتیاط و بدون تشخیص قطعی پاسخ بده. علائم خطر و لزوم مراجعه به پزشک را توضیح بده:\n"+text;
+ return "به عنوان دستیار اطلاعات سلامت، پاسخ محتاطانه بده و تشخیص قطعی نده. علائم خطر و مراجعه به پزشک را یادآوری کن:\n"+s;
  if(currentMode==="translate")
- return "متن زیر را به زبان درخواستی کاربر ترجمه کن. اگر زبان مقصد مشخص نشده، سؤال کن:\n"+text;
+ return "متن را به زبان مقصدی که کاربر مشخص کرده ترجمه کن. اگر مقصد مشخص نیست سؤال کن:\n"+s;
  if(currentMode==="code")
- return "به عنوان دستیار برنامه‌نویسی، کد دقیق و توضیح کاربردی ارائه کن:\n"+text;
- return text;
+ return "به عنوان دستیار برنامه‌نویسی پاسخ بده و کد کاربردی ارائه کن:\n"+s;
+ return s;
 }
-
 async function sendMessage(){
- const text=promptBox.value.trim();
- if(!text)return;
-
- addMessage(text,"user");
- promptBox.value="";
- statusBox.textContent="آرش در حال فکر کردن است...";
- const btn=document.getElementById("sendBtn");
- btn.disabled=true;
-
+ const s=promptBox.value.trim();if(!s)return;
+ addMessage(s,"user");promptBox.value="";
+ statusBox.textContent="آرش در حال پاسخ‌گویی است...";
+ const btn=document.getElementById("sendBtn");btn.disabled=true;
  try{
-  const response=await fetch(API_URL,{
+  const r=await fetch(API_URL,{
    method:"POST",
    headers:{"Content-Type":"application/json"},
-   body:JSON.stringify({prompt:buildPrompt(text)})
+   body:JSON.stringify({prompt:buildPrompt(s)})
   });
-
-  const data=await response.json();
-  if(!response.ok)throw new Error(data.error||"خطا در ارتباط با سرور");
-
+  const data=await r.json();
+  if(!r.ok)throw Error(data.error||"خطا در سرور");
   const answer=data.reply||data.response||data.message;
-  if(!answer)throw new Error("پاسخ معتبری از سرور دریافت نشد.");
-
+  if(!answer)throw Error("پاسخ معتبر دریافت نشد");
   addMessage(answer,"bot");
-  statusBox.textContent="پاسخ آرش آماده شد 💚";
+  statusBox.textContent="پاسخ آرش آماده است 💚";
   if(speechEnabled)speak(answer);
-
- }catch(error){
-  addMessage("ارتباط با سرور برقرار نشد: "+error.message,"bot");
-  statusBox.textContent="خطا در ارتباط؛ اتصال اینترنت و سرور را بررسی کنید.";
- }finally{
-  btn.disabled=false;
- }
+ }catch(e){
+  addMessage("خطا در ارتباط با سرور: "+e.message,"bot");
+  statusBox.textContent="ارتباط برقرار نشد";
+ }finally{btn.disabled=false}
 }
-
-document.getElementById("prompt").addEventListener("keydown",e=>{
- if(e.key==="Enter"&&!e.shiftKey){
- e.preventDefault();sendMessage();
- }
+promptBox.addEventListener("keydown",e=>{
+ if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendMessage()}
 });
 
 function createWaves(id){
  const el=document.getElementById(id);
- for(let i=0;i<15;i++){
-  const bar=document.createElement("i");
-  el.appendChild(bar);
- }
+ for(let i=0;i<15;i++)el.appendChild(document.createElement("i"));
 }
-createWaves("wavesLeft");
-createWaves("wavesRight");
+createWaves("leftWaves");createWaves("rightWaves");
 
-function waveActive(active){
- document.getElementById("wavesLeft").classList.toggle("active",active);
- document.getElementById("wavesRight").classList.toggle("active",active);
+function animateWaves(active){
+ document.querySelectorAll(".waves").forEach(x=>x.classList.toggle("active",active));
  document.getElementById("micBtn").classList.toggle("listening",active);
 }
-
 function toggleMic(){
- const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
- if(!SpeechRecognition){
- showToast("مرورگر شما تشخیص گفتار را پشتیبانی نمی‌کند.");
- return;
- }
-
- if(listening){
- recognition.stop();return;
- }
-
- recognition=new SpeechRecognition();
+ const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+ if(!SR){showToast("مرورگر از تشخیص گفتار پشتیبانی نمی‌کند.");return}
+ if(listening){recognition.stop();return}
+ recognition=new SR();
  recognition.lang=document.getElementById("language").value;
  recognition.interimResults=true;
  recognition.continuous=false;
-
  recognition.onstart=()=>{
- listening=true;waveActive(true);
- document.getElementById("micStatus").textContent="در حال شنیدن صدای شما...";
+  listening=true;animateWaves(true);
+  document.getElementById("micStatus").textContent="در حال شنیدن صدای شما...";
  };
-
  recognition.onresult=e=>{
- let text="";
- for(let i=e.resultIndex;i<e.results.length;i++){
- text+=e.results[i][0].transcript;
- }
- promptBox.value=text;
- if(e.results[e.results.length-1].isFinal){
- setTimeout(()=>sendMessage(),500);
- }
+  let text="";
+  for(let i=e.resultIndex;i<e.results.length;i++)text+=e.results[i][0].transcript;
+  promptBox.value=text;
+  if(e.results[e.results.length-1].isFinal)setTimeout(sendMessage,500);
  };
-
  recognition.onerror=e=>{
- document.getElementById("micStatus").textContent="خطای میکروفون: "+e.error;
+  document.getElementById("micStatus").textContent="خطای میکروفون: "+e.error;
  };
-
  recognition.onend=()=>{
- listening=false;waveActive(false);
- document.getElementById("micStatus").textContent="برای صحبت کردن روی میکروفون کلیک کنید";
+  listening=false;animateWaves(false);
+  document.getElementById("micStatus").textContent="برای صحبت روی میکروفون کلیک کنید";
  };
-
  recognition.start();
 }
-
-function speak(text){
- if(!("speechSynthesis" in window))return;
+function speak(s){
+ if(!window.speechSynthesis)return;
  window.speechSynthesis.cancel();
- const utterance=new SpeechSynthesisUtterance(text);
- utterance.lang=document.getElementById("language").value;
- utterance.rate=1;
- window.speechSynthesis.speak(utterance);
- waveActive(true);
- utterance.onend=()=>waveActive(false);
- utterance.onerror=()=>waveActive(false);
+ const u=new SpeechSynthesisUtterance(s);
+ u.lang=document.getElementById("language").value;
+ u.onstart=()=>animateWaves(true);
+ u.onend=()=>animateWaves(false);
+ u.onerror=()=>animateWaves(false);
+ window.speechSynthesis.speak(u);
 }
-
 function toggleSpeech(){
  speechEnabled=!speechEnabled;
  document.getElementById("speechBtn").textContent=speechEnabled?"🔊 صدا":"🔇 بی‌صدا";
  if(!speechEnabled)window.speechSynthesis?.cancel();
 }
-
-function handleFile(input){
- const file=input.files[0];
- if(!file)return;
- addMessage("فایل انتخاب شد: "+file.name,"user");
- showToast("فایل انتخاب شد؛ ارسال و تحلیل فایل هنوز به سرویس اختصاصی نیاز دارد.");
-}
-
-</script>
-</body>
-</html
+function fileSelected
